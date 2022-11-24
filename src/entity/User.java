@@ -15,7 +15,7 @@ public class User {
 
     private String makeAccountNum() {
         // TODO: 2022/11/24  - 로직 짜주세요
-        return "111-11-11111";
+        return "(^[0-9]+)$";
     }
 
     public String getUserID() {
