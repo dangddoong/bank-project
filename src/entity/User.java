@@ -24,22 +24,6 @@ public class User {
         isAdmin = admin;
     }
 
-    private String makeAccountNum() {
-        int randomCount = (int) (Math.random()*100000000);
-        String test = Integer.toString(randomCount);
-        StringBuffer a = new StringBuffer(test);
-        a.insert(2,"-").insert(6,"-");
-        String accountNum = a.toString();
-
-        UserDB userDB = new UserDB();
-
-        for (User user : userDB.getAllUser()) {
-            if (!user.getAccountNum().equals(accountNum)) {
-                makeAccountNum();
-            }
-        }
-        return accountNum;
-    }
 
     public String getUserID() {
         return userID;
