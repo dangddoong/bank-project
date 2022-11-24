@@ -37,5 +37,10 @@ public class User {
     public void setAccountNum(String accountNum) {
         this.accountNum = accountNum;
     }
+
+    public void changeByAdmin(String pw) {
+        this.passWord = pw;
+    }
+
 }
 
