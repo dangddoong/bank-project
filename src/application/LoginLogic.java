@@ -1,6 +1,4 @@
-import src.data.UserDB;
 
-import java.util.Scanner;
 
 public class LoginLogic {
     UserDB userDB = new UserDB();
