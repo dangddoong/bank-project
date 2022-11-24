@@ -14,7 +14,7 @@ public class AdminUI {
         String id = scanner.nextLine();
         System.out.println("비밀번호 입력");
         String pw = scanner.nextLine();
-        boolean success = adminLogic.login(id, pw);
+        String success = adminLogic.login(id, pw);
     }
 
     public void userApp() {

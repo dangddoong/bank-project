@@ -3,20 +3,20 @@ import data.UserDB;
 import entity.User;
 public class AdminLogic {
     UserDB userDB = new UserDB();
-    public boolean login(String id, String pw) {
+    public String login(String id, String pw) {
         if(userDB.getAllUser() == null){
             userDB.addAdmin();
         }
         User user = userDB.getAdmin();
 
         if(user.getUserID() != id){
-            throw new IllegalArgumentException("관리자가 아닙니다.");
+            throw new IllegalArgumentException("관리자 아님");
         }
 
         if(user.getPassWord() != pw){
-            throw new IllegalArgumentException("비밀번호가 틀렸습니다. 다시 입력해수제요");
+            throw new IllegalArgumentException("비밀번호 불일치");
         }
-            return true;
+            return "로그인성공";
         }
 
 }
