@@ -3,43 +3,27 @@ package application;
 import data.UserDB;
 import entity.User;
 
+import java.util.Optional;
+
 public class UserLogic {
     UserDB userDB = new UserDB();
 
-    public void signUp(String name, String id, String pw) {
-        if (userDB.getAllUser() == null) {
-            userDB.addAdmin();
+    public String signUp(String name, String id, String pw) {
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        if(opUser.isPresent()) {
+            throw new IllegalArgumentException("아이디 중복");
         }
-        for (User user : userDB.getAllUser()) {
-            if (user.getUserID().equals(id)) {
-                throw new IllegalArgumentException("아이디 중복");
-            }
-        }
-        User user = new User(name, id, pw);
+        User user = new User(name, id, pw, false);
         userDB.insertUser(user);
+        return "정상적으로 회원가입 되었습니다!";
     }
 
-    public String login(String id, String pw) {
-        for (User user : userDB.getAllUser()) {
-            if (!user.getUserID().equals(id)) {
-                throw new IllegalArgumentException("아이디 없음");
-            }
+    public User login(String id, String pw) {
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        if (!user.getPassWord().equals(pw)) {
+            throw new IllegalArgumentException("비밀번호 불일치");
         }
-
-        for (User user : userDB.getAllUser()) {
-            if (!user.getPassWord().equals(pw)) {
-                throw new IllegalArgumentException("비밀번호 불일치");
-            }
-        }
-        return "로그인 성공";
+        return user;
     }
 }
-//        if (id.matches(null)) {
-//            System.out.print("존재하지 않는 아이디입니다. ");
-//            System.out.print("다시 입력해주세요. ");
-//        }
-//
-//        while (userDB.getUserList(getUserId) != id || userDB.getUserPw(getUserPw) != password) {
-//            System.out.print("아이디 또는 비밀번호가 일치하지 않습니다. ");
-//            System.out.print("다시 입력해주세요. ");
-//        }

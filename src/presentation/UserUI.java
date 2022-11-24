@@ -1,48 +1,19 @@
 package presentation;
 
 import application.UserLogic;
+import entity.User;
 
 import java.util.Scanner;
 
 public class UserUI {
     Scanner scanner = new Scanner(System.in);
     UserLogic userLogic = new UserLogic();
+    User loginUser;
 
-    public void signUp() {
-        System.out.println("회원가입 진행");
-        System.out.println("이름 입력");
-        String name = scanner.nextLine();
-        System.out.println("아이디 입력");
-        String id = scanner.nextLine();
-        System.out.println("비밀번호 입력");
-        String pw = scanner.nextLine();
-        try {
-            userLogic.signUp(name, id, pw);
-        } catch () {
-        }
-    }
-
-    public void login() {
-        boolean isLogin = false;
-
-        System.out.println("로그인 진행");
-        System.out.println("아이디 입력");
-        String id = scanner.nextLine();
-        System.out.println("비밀번호 입력");
-        String pw = scanner.nextLine();
-
-        try {
-            isLogin = userLogic.login(id, pw);
-        } catch () {
-
-        }
-        if(isLogin == true) {
-            userApp();
-        }
-    }
-
-    public void userApp() {
-        while(true) {
+    public String userApp(User user) {
+        loginUser = user;
+        while (true) {
+            System.out.println(loginUser.getUserName() + " 님 환영합니다!");
             System.out.println("==== 조미김 은행 회원 페이지 ====");
             System.out.println("1. 입금 하기");
             System.out.println("2. 출금 하기");
@@ -51,12 +22,12 @@ public class UserUI {
             System.out.println("5. ");
             System.out.println("6. ");
             System.out.println("0. 로그아웃");
+            System.out.println("===================================");
             switch (scanner.nextLine()) {
                 case "0" -> {
-                    return;
+                    return "정상적으로 로그아웃 되었습니다!";
                 }
             }
-
         }
     }
 }

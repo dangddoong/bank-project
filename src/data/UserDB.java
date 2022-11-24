@@ -3,6 +3,7 @@ package data;
 import entity.User;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class UserDB {
     private ArrayList<User> userList = new ArrayList<>();
@@ -17,33 +18,24 @@ public class UserDB {
         return userList;
     }
 
-    //유저 1명 조회 - 계좌번호로 찾기 (개인별 서비스용 - 수정/삭제/거래내역 조회 등)
-    public User getUserByAccountNum(String accountNum){
-        for(User user : userList){
-            if(user.getAccountNum().equals(accountNum)){
-                return user;
+    public Optional<User> getUserByUserId(String userId) {
+        User findUser = null;
+        for (User user : userList) {
+            if (user.getUserID().equals(userId)) {
+                findUser = user;
+                break;
             }
         }
-        return null;
+        return Optional.ofNullable(findUser);
     }
 
     //유저 1명 조회 - 소유자 명으로 찾기 (개인별 서비스용 - 수정/삭제/거래내역 조회 등)
-    public User getUserByUserName(String userId){
+    public User getUserByUserName(String userName){
         for(User user : userList){
-            if(user.getUserID().equals(userId)){
+            if(user.getUserID().equals(userName)){
                 return user;
             }
         }
         return null;
-    }
-    //Admin계정 정보만 보내줌
-    public User getAdmin(){
-        User user = userList.get(0);
-        return user;
-    }
-
-    public void addAdmin(){
-        entity.User user = new entity.User("Admin", "1234", "관리자");
-        insertUser(user);
     }
 }
