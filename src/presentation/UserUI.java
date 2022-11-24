@@ -1,9 +1,13 @@
 package presentation;
 
+import application.UserLogic;
+
 import java.util.Scanner;
 
 public class UserUI {
     Scanner scanner = new Scanner(System.in);
+    UserLogic userLogic = new UserLogic();
+
     public void signUp() {
         System.out.println("회원가입 진행");
         System.out.println("이름 입력");
@@ -12,17 +16,29 @@ public class UserUI {
         String id = scanner.nextLine();
         System.out.println("비밀번호 입력");
         String pw = scanner.nextLine();
-        // service.signUp(name, id, pw);
+        try {
+            userLogic.signUp(name, id, pw);
+        } catch () {
+        }
     }
 
     public void login() {
+        boolean isLogin = false;
+
         System.out.println("로그인 진행");
         System.out.println("아이디 입력");
         String id = scanner.nextLine();
         System.out.println("비밀번호 입력");
         String pw = scanner.nextLine();
-        // service.login(id, pw);
-        // userApp();
+
+        try {
+            isLogin = userLogic.login(id, pw);
+        } catch () {
+
+        }
+        if(isLogin == true) {
+            userApp();
+        }
     }
 
     public void userApp() {

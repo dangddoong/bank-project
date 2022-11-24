@@ -6,11 +6,16 @@ public class User {
     private String userName;
     private String accountNum;
 
-    public User(String userID, String passWord, String name, String accountNum) {
+    public User(String userID, String passWord, String name) {
         this.userID = userID;
         this.passWord = passWord;
         this.userName = name;
-        this.accountNum = accountNum;
+        this.accountNum = makeAccountNum();
+    }
+
+    private String makeAccountNum() {
+        // TODO: 2022/11/24  - 로직 짜주세요
+        return "111-11-11111";
     }
 
     public String getUserID() {

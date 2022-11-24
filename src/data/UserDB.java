@@ -1,7 +1,8 @@
 package data;
 
+import entity.User;
+
 import java.util.ArrayList;
-import application.User;
 
 public class UserDB {
     private ArrayList<User> userList = new ArrayList<>();
@@ -17,9 +18,9 @@ public class UserDB {
     }
 
     //유저 1명 조회 - 계좌번호로 찾기 (개인별 서비스용 - 수정/삭제/거래내역 조회 등)
-    public User getUserByAccountNum(int accountNum){
+    public User getUserByAccountNum(String accountNum){
         for(User user : userList){
-            if(user.getAccountNum() == accountNum){
+            if(user.getAccountNum().equals(accountNum)){
                 return user;
             }
         }
@@ -27,16 +28,13 @@ public class UserDB {
     }
 
     //유저 1명 조회 - 소유자 명으로 찾기 (개인별 서비스용 - 수정/삭제/거래내역 조회 등)
-    public User getUserByUserName(String userName){
+    public User getUserByUserName(String userId){
         for(User user : userList){
-            if(user.getUserName() == userName){
+            if(user.getUserID().equals(userId)){
                 return user;
             }
         }
         return null;
     }
     //
-
-
-
 }
