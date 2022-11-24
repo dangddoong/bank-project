@@ -38,4 +38,10 @@ public class UserDB {
         }
         return null;
     }
+
+    public String changeUserPassword(Optional<User> user, String pw) {
+        int num = userList.indexOf(user);
+        userList.get(num).ChangeUserPassword(pw);
+        return "변경 완료";
+    }
 }

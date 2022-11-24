@@ -30,6 +30,10 @@ public class User {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+    public void ChangeUserPassword(String pw) {
+        this.passWord = pw;
+    }
 }
 
 
