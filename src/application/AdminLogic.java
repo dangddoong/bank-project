@@ -1,4 +1,3 @@
-package application;
 import data.UserDB;
 import entity.User;
 public class AdminLogic {

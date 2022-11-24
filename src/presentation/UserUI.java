@@ -1,6 +1,6 @@
 package presentation;
 
-import application.UserLogic;
+import UserLogic;
 
 import java.util.Scanner;
 

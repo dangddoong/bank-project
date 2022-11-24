@@ -1,6 +1,6 @@
 package presentation;
 
-import application.AdminLogic;
+import AdminLogic;
 
 import java.util.Scanner;
 
