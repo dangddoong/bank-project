@@ -84,7 +84,10 @@ public class AdminLogic {
 
     }
 
-
+    public String findUserToAccount(String userAccount){
+        AccountDB accountDB = new AccountDB();            //AccountDB에서 Account만 빼오는 것
+        Account account = accountDB.stream().filter(a->a.getUserAccountNum().equal(userAccount));
+    }
 }
 
    /* public Optional<Account> confirmAccount(String userAccount){

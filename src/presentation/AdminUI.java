@@ -18,7 +18,9 @@ public class AdminUI {
             System.out.println(loginUser.getUserName() + " 관리자님 환영합니다!");
             System.out.println("==== 조미김 은행 관리자 페이지 ====");
             System.out.println("1. 사용자 정보 수정");//사용자 id와 변경할 비밀번호 필요
-            System.out.println("2. 사용자 정보 삭제"); //사용자 id필요 <= 검증 로직(id가 없으면 exception) + 삭제 로직
+            System.out.println("2. 사용자 정보 삭제");
+            //id가 없으면 null 반환, 있으면 List<Acount> 반환, 이후 인덱스와 계좌번호리스트를 띄우는 UI 필요
+            //UI에서 번호 입력시 List<Account>와 함께 번호를 반환 <= 리스트로 변경 가능하기 때문에 선택번호와 인덱스 맞춰줄 것
             System.out.println("3. 계좌번호로 사용자 찾기");
             System.out.println("4. 소유자명으로 계좌 찾기");
             System.out.println("5. 은행 내 모든 계좌 조회");
