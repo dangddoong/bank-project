@@ -1,5 +1,6 @@
 package application;
 import data.UserDB;
+import data.AccountDB;
 import entity.User;
 
 import java.util.Optional;
@@ -26,37 +27,41 @@ public class AdminLogic {
         return user;
     }
 
-    public boolean confirmId(String id){
+    public Optional<User> confirmId(String id){
         for (User user : userDB.getAllUser()) {
             if(user.getUserID().equals(id)){
-                return true;
+                return Optional.of(user);
             }
         }
-        return false;
+        return Optional.empty();
     }
 
-    public String changeUserPw(String pw, String id) {
-        for (User user : userDB.getAllUser()) {
-            if(user.getUserID().equals(id)){
-                break;
-            }
+    public String changeUserPw(String id) {
+        Optional<User> user = confirmId(id);
+        if(user.isEmpty()){
+            throw new IllegalArgumentException("아이디 없음");
         }
         return "변경 성공";
     }
 
-    public String deleteAccount(String id) {
-        for (User user : userDB.getAllUser()) {
-            if (user.getUserID().equals(id)) {
-                break;
-            }
+    public String deleteAccount(String userAccount) {
+        Optional<Account> account = confirmAccount(userAccount);
+        if(account.isEmpty()){
+            throw new IllegalArgumentException("계좌 없음");
         }
+        AccountDB accountDB = new AccountDB();
+        accountDB(account);
         return "삭제 완료";
     }
 
-    public User confirmAccount(String Account){
-        for (User user : userDB.getAllUser()) {
+    public Optional<Account> confirmAccount(String userAccount){
+        AccountDB accountDB = new AccountDB();
+        for (Account account : accountDB) {
+            if (account.getAccountNum().equals(userAccount)) {
+                return account;
+            }
         }
-        return null;
+        return Optional.empty();
     }
 }
 
