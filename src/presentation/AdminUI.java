@@ -1,9 +1,12 @@
 package presentation;
 
+import application.AdminLogic;
+
 import java.util.Scanner;
 
 public class AdminUI {
     Scanner scanner = new Scanner(System.in);
+    AdminLogic adminLogic = new AdminLogic();
 
     public void login() {
         System.out.println("로그인 진행");
@@ -11,8 +14,7 @@ public class AdminUI {
         String id = scanner.nextLine();
         System.out.println("비밀번호 입력");
         String pw = scanner.nextLine();
-        // service.login(id, pw);
-        // adminApp();
+        boolean success = adminLogic.login(id, pw);
     }
 
     public void userApp() {

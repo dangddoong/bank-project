@@ -7,9 +7,10 @@ import java.util.Scanner;
 
 public class UserLogic {
     UserDB userDB = new UserDB();
-    Scanner scanner = new Scanner(System.in);
-
     public void signUp(String name, String id, String pw) {
+        if(userDB.getAllUser() == null){
+            userDB.addAdmin();
+        }
         for (User user : userDB.getAllUser()) {
             if(user.getUserID().equals(id)) {
                 throw new IllegalArgumentException("이미 존재하는 아이디입니다.");

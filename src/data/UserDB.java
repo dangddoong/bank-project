@@ -36,5 +36,14 @@ public class UserDB {
         }
         return null;
     }
-    //
+    //Admin계정 정보만 보내줌
+    public User getAdmin(){
+        User user = userList.get(0);
+        return user;
+    }
+
+    public void addAdmin(){
+        entity.User user = new entity.User("Admin", "1234", "관리자");
+        insertUser(user);
+    }
 }
