@@ -1,16 +1,16 @@
 package entity;
 
-import data.UserDB;
-
 public class Account {
     private int accountNumCount = 1231212345;
     private int accountDeposit ;
     private String userID;
     private String accountNum;
+    private String userName;
 
-    public Account(String userID) {
+    public Account(String userID, String userName) {
         this.accountNum = makeAccountNum();
         this.accountDeposit = 0;
+        this.userName = userName;
         this.userID = userID;
     }
 
@@ -22,6 +22,14 @@ public class Account {
         accountNumCount++;
         return accountNum;
     }
+
+    public String getAccountNum() {
+        return accountNum;
+    }
+    public String getUserName() {
+        return userName;
+    }
+
 
 
 
