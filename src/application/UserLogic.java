@@ -3,8 +3,6 @@ package application;
 import data.UserDB;
 import entity.User;
 
-import java.util.Scanner;
-
 public class UserLogic {
     UserDB userDB = new UserDB();
 
@@ -14,45 +12,28 @@ public class UserLogic {
         }
         for (User user : userDB.getAllUser()) {
             if (user.getUserID().equals(id)) {
-                throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
+                throw new IllegalArgumentException("아이디 중복");
             }
         }
         User user = new User(name, id, pw);
         userDB.insertUser(user);
     }
 
-    public boolean login(String id, String pw) {
-        // TODO: 2022/11/24 -DB에서 해당하는 유저가 있는지 찾아주세요 - 없으면 예외발생
-
+    public String login(String id, String pw) {
         for (User user : userDB.getAllUser()) {
             if (!user.getUserID().equals(id)) {
-                throw new IllegalArgumentException("해당하는 아이디가 없습니다. ");
+                throw new IllegalArgumentException("아이디 없음");
             }
         }
 
         for (User user : userDB.getAllUser()) {
             if (!user.getPassWord().equals(pw)) {
-                throw new IllegalArgumentException("비밀번호가 일치하지 않습니다. ");
+                throw new IllegalArgumentException("비밀번호 불일치");
             }
         }
-        return true;
-    }
-
-
-    public String Validation() {
-        System.out.print("비밀번호를 입력해주세요 : ");
-        String pw = scanner.nextLine();
-
-        System.out.print("비밀번호를 다시 입력해주세요 : ");
-        String pwValidation = scanner.nextLine();
-
-        if (pw != pwValidation) {
-            Validation();
-        }
-        return pw;
+        return "로그인 성공";
     }
 }
-
 //        if (id.matches(null)) {
 //            System.out.print("존재하지 않는 아이디입니다. ");
 //            System.out.print("다시 입력해주세요. ");
