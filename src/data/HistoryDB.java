@@ -28,9 +28,9 @@ public class HistoryDB {
         histories.add(history);
     }
 
-    public Optional<History> getHistory(String account) {
+    public Optional<History> getHistory(String accountNum) {
         for (History history : histories) {
-            if (history.getAccountNum().equals(account)) {
+            if (history.getAccountNum().equals(accountNum)) {
                 return Optional.of(history);
             }
         }
@@ -43,5 +43,11 @@ public class HistoryDB {
                 .collect(Collectors.toList())
                 .forEach(h->{ histories.remove(h); } );
     }
+    public List<History> getAllHistoryListByAccountNum(String accountNum) {
+        List<History> historyList = histories.stream().filter(x -> x.getAccountNum().equals(accountNum)).collect(Collectors.toList());
+        return historyList;
+    }
+
+
 }
 
