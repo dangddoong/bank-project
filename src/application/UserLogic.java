@@ -44,7 +44,7 @@ public class UserLogic {
     }
 
     public History createWithdrawHistory(Account accounts, String money){
-        History history = new History(accounts.getAccountNum(), 출금, money,"조미김 은행");
+        History history = new History(accounts.getAccountNum(), TradeType.출금, money,"조미김 은행");
         historyDB.insertHistory(history);
         return history;
     }
