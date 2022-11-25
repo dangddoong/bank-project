@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class AdminUI {
     Scanner scanner = new Scanner(System.in);
-    AdminLogic adminLogic = new AdminLogic();
+    AdminLogic adminLogic = AdminLogic.getInstance();
     User loginUser;
     String message = "";
 

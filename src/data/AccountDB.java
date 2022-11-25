@@ -4,6 +4,14 @@ import entity.Account;
 import java.util.ArrayList;
 
 public class AccountDB {
+
+    private static AccountDB accountDB = new AccountDB();
+
+    public static AccountDB getInstance() {
+        return accountDB;
+    }
+
+
 //    private int maxAccountID = 0;
     //account가 있을때마다 max 를 하나씩 증가시키는 부분.
     // 만약에 admin 에서 계좌 개수를 카운트하기로 한다면? 그때 구현할게요. 어렵진 않은데 충돌방지로 일단 킵...

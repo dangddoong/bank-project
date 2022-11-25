@@ -10,6 +10,13 @@ import java.util.stream.Collectors;
 
 // 거래 내역은 거래 일자, 거래 시간, 계좌번호, 입금/출금 여부, 거래 금액, 은행 명으로 구성된다.
 public class HistoryDB {
+
+    private static HistoryDB historyDB = new HistoryDB();
+
+    public static HistoryDB getInstance() {
+        return historyDB;
+    }
+
     private ArrayList<History> histories = new ArrayList<>();
 
     public ArrayList<History> getAllHistory(){

@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class App {
     static Scanner scanner = new Scanner(System.in);
     static String message = "";
-    static AdminUI adminUI = new AdminUI();
-    static UserLogic userLogic = new UserLogic();
-    static AdminLogic adminLogic = new AdminLogic();
+    static UserLogic userLogic = UserLogic.getInstance();
+    static AdminLogic adminLogic = AdminLogic.getInstance();
     static UserUI userUI = new UserUI();
+    static AdminUI adminUI = new AdminUI();
 
     public static void main(String[] args) {
         initData();

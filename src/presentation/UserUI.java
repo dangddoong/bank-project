@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class UserUI {
     Scanner scanner = new Scanner(System.in);
-    UserLogic userLogic = new UserLogic();
+    UserLogic userLogic = UserLogic.getInstance();
     User loginUser;
 
     public String userApp(User user) {

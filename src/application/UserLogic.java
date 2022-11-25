@@ -1,12 +1,22 @@
 package application;
 
+import data.AccountDB;
+import data.HistoryDB;
 import data.UserDB;
 import entity.User;
 
 import java.util.Optional;
 
 public class UserLogic {
-    UserDB userDB = new UserDB();
+    UserDB userDB = UserDB.getInstance();
+    AccountDB accountDB = AccountDB.getInstance();
+    HistoryDB historyDB = HistoryDB.getInstance();
+
+    private static UserLogic userLogic = new UserLogic();
+
+    public static UserLogic getInstance() {
+        return userLogic;
+    }
 
     public String signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);

@@ -13,9 +13,15 @@ import java.util.stream.Collectors;
 
 
 public class AdminLogic {
-    UserDB userDB = new UserDB();
-    AccountDB accountDB = new AccountDB();
-    HistoryDB historyDB = new HistoryDB();
+    UserDB userDB = UserDB.getInstance();
+    AccountDB accountDB = AccountDB.getInstance();
+    HistoryDB historyDB = HistoryDB.getInstance();
+
+    private static AdminLogic adminLogic = new AdminLogic();
+
+    public static AdminLogic getInstance() {
+        return adminLogic;
+    }
 
     public String signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
