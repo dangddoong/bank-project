@@ -89,12 +89,14 @@ public class UserUI {
         System.out.println("사용자 계좌 정보입니다.");
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
+            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum() +
+                    ", 잔액 : " + accountList.get(i).getAccountBalance()) ;
         }
-        System.out.println("다시 보시려면 y 를 입력해주세요.");
-        if(scanner.nextLine().equals("y")) {
-            showAccountInfo();
+        System.out.println("0을 입력하시면 원래 화면으로 돌아갑니다.");
+        if(scanner.nextLine().equals("0")) {
+            return;
         }
+        showAccountInfo();
     }
 
     private void showHistories() {
