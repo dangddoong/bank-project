@@ -60,7 +60,7 @@ public class AdminUI {
             System.out.println("해당 유저의 계좌는 다음과같습니다.");
             int index = 1;
             for (Account userAccount : userAccounts) {
-                System.out.println(index + " : " + userAccount);
+                System.out.println(index + " : " + userAccount.toString());
             }
             System.out.print("삭제를 원하는 계좌의 순서 번호 입력해주세요: ");
             String idx = scanner.nextLine();
@@ -94,7 +94,7 @@ public class AdminUI {
             System.out.println(userId + "님의 계좌 목룍입니다.");
             List<Account> accountList = adminLogic.getUserAccounts(userId);
             for (Account account : accountList) {
-                System.out.println(account);
+                System.out.println(account.toString());
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -111,7 +111,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 계좌 리스트입니다.");
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("account = " + account);
+            System.out.println("account = " + account.toString());
         }
         System.out.println("zero to back");
 
@@ -121,7 +121,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 거래내역 리스트입니다.");
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println(histories);
+            System.out.println(histories.toString());
         }
         System.out.println("zero to back");
     }
