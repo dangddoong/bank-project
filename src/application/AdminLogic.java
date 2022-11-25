@@ -2,9 +2,11 @@ package application;
 import data.UserDB;
 import data.AccountDB;
 import data.HistoryDB;
+import entity.History;
 import entity.User;
 import entity.Account;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 public class AdminLogic {
     UserDB userDB = new UserDB();
+    AccountDB accountDB = new AccountDB();
+    HistoryDB historyDB = new HistoryDB();
 
     public String signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
@@ -35,58 +39,50 @@ public class AdminLogic {
     public Optional<User> confirmId(String id) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isEmpty()) {
-            return Optional.empty();
+            throw new IllegalArgumentException("아이디 없음");
         }
-        Optional<User> user = opUser;
-        return user;
+        return opUser;
     }
 
     public String changeUserPw(String id, String pw) {
         Optional<User> user = confirmId(id);
-        if (user.isEmpty()) {
-            throw new IllegalArgumentException("아이디 없음");
-        }
-        String message = userDB.changeUserPassword(user, pw);
+        User foundUser = user.get();
+        foundUser.changeUserPassword(pw);
+        String message = "비밀번호 변경 완료";
         return message;
     }
 
-    public List<Account> getUserAccount(String id) {
-        if ((Object) confirmId(id) == Optional.empty()) {
-            return null;
-        }
-
-        AccountDB accountDB = new AccountDB();
-        //getUserID는 AccountDB에서 userID만 받아오는 것
-        List<Account> accounts = accountDB.stream()
+    public List<Account> getUserAccounts(String id) {
+        Optional<User> user = confirmId(id);
+        List<Account> accounts = accountDB.getAllAccount()
+                .stream()
                 .filter(i -> i.getUserId().equals(id))
                 .collect(Collectors.toList());
-
         return accounts;
     }
 
-    public String chooseAccount(List<Account> accounts, String num) {
-        int index = 0;
-        Account[] accountArray = (Account[]) accounts.toArray();   //여기 주의 오류 위험
-        for (Account account : accounts) {
-            if (Integer.parseInt(num) == index) {
-                break;
-            }
-            index++;
-        }
-        //getAccountNum은 Accoun애서 계좌번호를 받아온 것(String이어야 함)
-        deleteAccount(accountArray[index].getAccountNum());
-
-        return "삭제 완료";
-    }
-    public void deleteAccount(String accountNum) {
-        HistoryDB historyDB = new HistoryDB();
-        historyDB.deleteAccountHistory(accountNum);
-
+    public void deleteAccount(Account account) {
+        accountDB.deleteAccount(account);
+        historyDB.deleteHistoriesByAccountNumber(account.getAccountNum());
     }
 
-    public String findUserToAccount(String userAccount){
-        AccountDB accountDB = new AccountDB();            //AccountDB에서 Account만 빼오는 것
-        Account account = accountDB.stream().filter(a->a.getUserAccountNum().equal(userAccount));
+    public User findUserByAccount(String userAccount){
+        Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
+        Account account = first.get();
+        String userId = account.getID();
+        Optional<User> opUser = userDB.getUserByUserId(userId);
+        User user = opUser.get();
+        return user;
+    }
+
+    public ArrayList<Account> getAllAcounts() {
+        ArrayList<Account> allAccounts = accountDB.getAllAccount();
+        return allAccounts;
+    }
+
+    public ArrayList<History> getAllHistories() {
+        ArrayList<History> histories = historyDB.getAllHistory();
+        return histories;
     }
 }
 
