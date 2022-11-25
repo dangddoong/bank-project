@@ -91,7 +91,7 @@ public class UserUI {
         try {
             History history = userLogic.createWithdrawHistory(accounts.get(Integer.parseInt(num) - 1), money);
             System.out.println("입급에 성공하셨습니다.");
-            System.out.print("현재 잔액 : ");
+            System.out.print("현재 잔액 : " + history.getMoney() + "원");
 
         } catch (Exception e) {
             String string = e.getMessage();
@@ -110,9 +110,38 @@ public class UserUI {
     }
 
     private void showAccountInfo() {
+        System.out.println("사용자 정보입니다");
+        System.out.println("사용자 아이디 :" + loginUser.getUserID());
+        System.out.println("사용자 이름 : " + loginUser.getUserName());
+        System.out.println("사용자 계좌 정보입니다.");
+        List<Account> accountList = userLogic.getMyAccounts(loginUser);
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum() +
+                    ", 잔액 : " + accountList.get(i).getAccountBalance()) ;
+        }
+        System.out.println("0을 입력하시면 원래 화면으로 돌아갑니다.");
+        if(scanner.nextLine().equals("0")) {
+            return;
+        }
+        showAccountInfo();
     }
 
     private void showHistories() {
+        System.out.println("현재 소유하고 계신 계좌 목록입니다.");
+        List<Account> accountList = userLogic.getMyAccounts(loginUser);
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
+        }
+        System.out.println("계좌 거래 내역 조회 할 계좌의 순서번호를 입력해주세요.");
+        int accountChoiceNum = Integer.parseInt(scanner.nextLine());
+        System.out.println("요청하신 계좌의 거래 내역입니다.");
+        // 이거를 Logic에서 method 만들어가지고 쓰도록 한다.
+        String accountNum = accountList.get(accountChoiceNum-1).getAccountNum();
+        List<History> HistoryList = userLogic.getAccountHistory(accountNum);
+        for (int i = 0; i < HistoryList.size(); i++) {
+            System.out.println((i+1) + ". " + HistoryList.get(i));
+        }
+
     }
 
     private void makeAccount() {
@@ -124,7 +153,9 @@ public class UserUI {
         System.out.println("계좌를 새로 생성하시려면 y 를 입력해주세요: ");
         if (scanner.nextLine().equals("y")) {
             userLogic.makeAccount(loginUser);
+            message = "정상적으로 처리되었습니다.";
+            return;
         }
-        message = "정상적으로 처리되었습니다.";
+        message = "생성 취소";
     }
 }

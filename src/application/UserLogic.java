@@ -72,11 +72,4 @@ public class UserLogic {
         historyDB.insertHistory(history);
         return history;
     }
-
-    public void depositMoney(int deposit, Account account) {
-        account.depositMoney(account, deposit);
-        String money = String.valueOf(deposit);
-        History history = new History(account.getAccountNum(), TradeType.입금, money, "조미김");
-        historyDB.insertHistory(history);
-    }
 }
