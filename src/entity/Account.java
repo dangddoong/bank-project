@@ -17,7 +17,7 @@ public class Account {
     private String makeAccountNum() {
         String accountNumCountToString = Integer.toString(accountNumCount);
         StringBuffer accountNumCountToStringBuffer = new StringBuffer(accountNumCountToString);
-        accountNumCountToStringBuffer.insert(3,"-").insert(5,"-");
+        accountNumCountToStringBuffer.insert(2,"-").insert(4,"-");
         String accountNum = accountNumCountToStringBuffer.toString();
         accountNumCount++;
         return accountNum;
