@@ -1,7 +1,6 @@
 package data;
 
 import entity.History;
-import entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,9 @@ public class HistoryDB {
         return historyList;
     }
 
-
+    public List<History> getAccountHistory(String accountNum){
+        return historyDB.getAllHistoryListByAccountNum(accountNum);
+    }
 }
+
 

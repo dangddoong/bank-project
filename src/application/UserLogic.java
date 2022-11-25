@@ -28,7 +28,7 @@ public class UserLogic {
 
     public String signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
-        if(opUser.isPresent()) {
+        if (opUser.isPresent()) {
             throw new IllegalArgumentException("아이디 중복");
         }
         User user = new User(id, pw, name, false);
@@ -59,17 +59,29 @@ public class UserLogic {
         List<Account> accounts = accountDB.getAllAccountByUserName(user.getUserName());
         return accounts;
     }
-    public List<Account> findAccountInfo(User user){
+
+    public List<Account> findAccountInfo(User user) {
         List<Account> accounts = accountDB.getAllAccount().stream().
                 filter(id -> id.getUserID()
                         .equals(user.getUserID()))
                 .collect(Collectors.toList());
-        return  accounts;
+        return accounts;
     }
 
-    public History createWithdrawHistory(Account accounts, String money){
-        History history = new History(accounts.getAccountNum(), TradeType.출금, money,"조미김 은행");
+    public History createWithdrawHistory(Account accounts, String money) {
+        History history = new History(accounts.getAccountNum(), TradeType.출금, money, "조미김 은행");
         historyDB.insertHistory(history);
         return history;
+    }
+
+    public void depositMoney(int deposit, Account account) {
+        account.depositMoney(account, deposit);
+        String money = String.valueOf(deposit);
+        History history = new History(account.getAccountNum(), TradeType.입금, money, "조미김");
+        this.historyDB.insertHistory(history);
+    }
+
+    public List<History> getAccountHistory(String accountNum) {
+        return historyDB.getAllHistoryListByAccountNum(accountNum);
     }
 }
