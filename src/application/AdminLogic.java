@@ -22,7 +22,7 @@ public class AdminLogic {
         if (opUser.isPresent()) {
             throw new IllegalArgumentException("아이디 중복");
         }
-        User user = new User(name, id, pw, true);
+        User user = new User(id, pw, name, true);
         userDB.insertUser(user);
         return "정상적으로 회원가입 되었습니다!";
     }

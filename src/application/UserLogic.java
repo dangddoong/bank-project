@@ -13,7 +13,7 @@ public class UserLogic {
         if(opUser.isPresent()) {
             throw new IllegalArgumentException("아이디 중복");
         }
-        User user = new User(name, id, pw, false);
+        User user = new User(id, pw, name, false);
         userDB.insertUser(user);
         return "정상적으로 회원가입 되었습니다!";
     }
