@@ -1,4 +1,4 @@
-package application;
+package src.entity;
 
 
 public enum TradeType {

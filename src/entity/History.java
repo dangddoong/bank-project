@@ -1,6 +1,6 @@
 package entity;
 
-import application.TradeType;
+import src.entity.TradeType;
 
 import java.time.format.DateTimeFormatter;
 
