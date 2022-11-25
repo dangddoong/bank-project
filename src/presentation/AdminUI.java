@@ -49,7 +49,19 @@ public class AdminUI {
         String userId = scanner.nextLine();
         System.out.println("새로운 비밀번호를 입력해주세요");
         String newPassword = scanner.nextLine();
-        adminLogic.changeUserPw(userId, newPassword);
+        try {
+            adminLogic.changeUserPw(userId, newPassword);
+            System.out.println("비밀번호 변경이 완료 되었습니다.");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        finally {
+            System.out.println("뒤로 돌아가려면 아무키나 눌러주세요");
+            if (!scanner.nextLine().isEmpty()) {
+                return;
+            }
+        }
+
     }
 
     private void deleteAccount() {
@@ -79,34 +91,39 @@ public class AdminUI {
     }
 
     private void findUserByAccountNumber() {
-        System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
-        String accountNumber = scanner.nextLine();
-        User user = adminLogic.findUserByAccount(accountNumber);
-        System.out.println("계좌버호의 소유자는 : " + user + "님입니다.");
-        System.out.println("뒤로가려면 0");
-        String s = scanner.nextLine();
-    }
-
-    private void findAccountsByUserId() {
-        System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
-        String userId = scanner.nextLine();
         try {
-            System.out.println(userId + "님의 계좌 목룍입니다.");
-            List<Account> accountList = adminLogic.getUserAccounts(userId);
-            for (Account account : accountList) {
-                System.out.println(account.toString());
-            }
-        }catch (Exception e){
+            System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
+            String accountNumber = scanner.nextLine();
+            User user = adminLogic.findUserByAccount(accountNumber);
+            System.out.println("계좌버호의 소유자는 : " + user + "님입니다.");
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-        }finally {
+        } finally {
+            System.out.println("뒤로 돌아가려면 아무키나 눌러주세요");
+            if (!scanner.nextLine().isEmpty()) {
+                return;
+            }
+        }
+    }
+        private void findAccountsByUserId() {
+            System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
+            String userId = scanner.nextLine();
+            try {
+                System.out.println(userId + "님의 계좌 목룍입니다.");
+                List<Account> accountList = adminLogic.getUserAccounts(userId);
+                for (Account account : accountList) {
+                    System.out.println(account.toString());
+                }
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
                 System.out.println("뒤로 돌아가려면 아무키나 눌러주세요");
                 if (!scanner.nextLine().isEmpty()) {
                     return;
+                }
             }
+
         }
-
-    }
-
     private void findAllAccounts() {
         System.out.println("은행 내 모든 계좌 리스트입니다.");
         ArrayList<Account> accounts = adminLogic.getAllAcounts();

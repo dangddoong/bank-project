@@ -29,6 +29,7 @@ public class UserUI {
             System.out.println("5. 계좌 생성하기");
             System.out.println("0. 로그아웃");
             System.out.println("===================================");
+            System.out.print("원하시는 작업을 입력해주세요 : ");
             switch (scanner.nextLine()) {
                 case "1" -> depositMoney();
                 case "2" -> withdrawMoney();
@@ -36,11 +37,15 @@ public class UserUI {
                 case "4" -> showHistories();
                 case "5" -> makeAccount();
                 case "0" -> {
-                    return "정상적으로 로그아웃 되었습니다!";
+                    return "정상적으로 로그아웃 되었습니다.";
+                }
+                default -> {
+                    System.out.println("잘못된 입력입니다.");
                 }
             }
         }
     }
+
 
     private void depositMoney() {
     }
@@ -61,25 +66,20 @@ public class UserUI {
         System.out.printf("출금할 금액을 입력해주세요 : ");
         String money = scanner.nextLine();
         try {
-            History history = userLogic.createWithdrawHistory(accounts.get(Integer.parseInt(num) -1) , money);
+            History history = userLogic.createWithdrawHistory(accounts.get(Integer.parseInt(num) - 1), money);
             System.out.println("입급에 성공하셨습니다.");
             System.out.print("현재 잔액 : " + history.getMoney() + "원");
 
-        }catch(Exception e){
+        } catch (Exception e) {
             String string = e.getMessage();
             System.out.println("잔액이 부족합니다");
 
-        }
-        finally {
-            while(true) {
-                System.out.println("돌아가시려면 0번을 눌러주세요");
-                String in = scanner.nextLine();
-                if(in == "0"){
-                    return;
-                }
+        } finally {
+            System.out.println("돌아가시려면 아무 키나 입력해주세요");
+            if (!scanner.nextLine().isEmpty()) {
+                return;
             }
         }
-
     }
 
     private void showAccountInfo() {
@@ -89,11 +89,11 @@ public class UserUI {
         System.out.println("사용자 계좌 정보입니다.");
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum() +
-                    ", 잔액 : " + accountList.get(i).getAccountBalance()) ;
+            System.out.println((i + 1) + ". " + accountList.get(i).getAccountNum() +
+                    ", 잔액 : " + accountList.get(i).getAccountBalance());
         }
         System.out.println("0을 입력하시면 원래 화면으로 돌아갑니다.");
-        if(scanner.nextLine().equals("0")) {
+        if (scanner.nextLine().equals("0")) {
             return;
         }
         showAccountInfo();
@@ -106,10 +106,10 @@ public class UserUI {
         System.out.println("현재 소유하고 계신 계좌 목록입니다.");
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
+            System.out.println((i + 1) + ". " + accountList.get(i).getAccountNum());
         }
         System.out.println("계좌를 새로 생성하시려면 y 를 입력해주세요: ");
-        if(scanner.nextLine().equals("y")) {
+        if (scanner.nextLine().equals("y")) {
             userLogic.makeAccount(loginUser);
             message = "정상적으로 처리되었습니다.";
             return;
