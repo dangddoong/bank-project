@@ -31,7 +31,7 @@ public class User {
         return isAdmin;
     }
 
-    public void ChangeUserPassword(String pw) {
+    public void changeUserPassword(String pw) {
         this.passWord = pw;
     }
 }
