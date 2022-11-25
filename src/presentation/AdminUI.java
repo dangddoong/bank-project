@@ -54,14 +54,15 @@ public class AdminUI {
 
     private void deleteAccount() {
         System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
-        List<Account> userAccounts = adminLogic.getUserAccounts();
+        String id = scanner.nextLine();
+        List<Account> userAccounts = adminLogic.getUserAccounts(id);
         System.out.println("해당 유저의 계좌는 다음과같습니다.");
         for (int i = 0; i < userAccounts.size(); i++) {
             System.out.println((i+1) + "계좌번호 : ");
         }
         System.out.println("삭제를 원하는 계좌의 번호 입력해주세요: ");
         String idx = scanner.nextLine();
-        Account account = userAccounts.get(i - 1);
+        Account account = userAccounts.get(Integer.parseInt(idx) - 1);
         adminLogic.deleteAccount(account);
     }
 

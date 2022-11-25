@@ -25,9 +25,10 @@ public class HistoryDB {
         }
         return Optional.empty();
     }
-    public void deleteAccountHistory(String account){
+
+    public void deleteHistoriesByAccountNumber(String accountNum) {
         histories.stream()
-                .filter(a -> a.getAccountNum().equals(account))
+                .filter(a -> a.getAccountNum().equals(accountNum))
                 .collect(Collectors.toList())
                 .forEach(h->{histories.remove(h); } );
     }

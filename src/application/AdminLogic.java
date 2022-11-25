@@ -56,7 +56,7 @@ public class AdminLogic {
         Optional<User> user = confirmId(id);
         List<Account> accounts = accountDB.getAllAccount()
                 .stream()
-                .filter(i -> i.getUserId().equals(id))
+                .filter(i -> i.getUserID().equals(id))
                 .collect(Collectors.toList());
         return accounts;
     }
@@ -69,7 +69,7 @@ public class AdminLogic {
     public User findUserByAccount(String userAccount){
         Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
         Account account = first.get();
-        String userId = account.getID();
+        String userId = account.getUserID();
         Optional<User> opUser = userDB.getUserByUserId(userId);
         User user = opUser.get();
         return user;
