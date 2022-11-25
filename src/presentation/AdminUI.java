@@ -36,7 +36,6 @@ public class AdminUI {
                 case "4" -> findAccountsByUserId();
                 case "5" -> findAllAccounts();
                 case "6" -> findAllHistories();
-
                 case "0" -> {
                     return "정상적으로 로그아웃 되었습니다!";
                 }
