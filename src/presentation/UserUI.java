@@ -23,10 +23,32 @@ public class UserUI {
             System.out.println("0. 로그아웃");
             System.out.println("===================================");
             switch (scanner.nextLine()) {
+                case "1" -> depositMoney();
+                case "2" -> withdrawMoney();
+                case "3" -> showAccountInfo();
+                case "4" -> showHistories();
+                case "5" -> makeAccount();
                 case "0" -> {
                     return "정상적으로 로그아웃 되었습니다!";
                 }
             }
         }
+    }
+
+    private void depositMoney() {
+    }
+
+    private void withdrawMoney() {
+
+    }
+
+    private void showAccountInfo() {
+    }
+
+    private void showHistories() {
+    }
+
+    private void makeAccount() {
+
     }
 }
