@@ -46,6 +46,7 @@ public class UserUI {
     private void depositMoney() {
         Account account = showAccountsAndScanIdxAndGetAccount();
         if(account == null) {
+            setMessage("잘못된 입력입니다.");
             return;
         }
         System.out.print("입금액을 입력하세요. : ");
@@ -61,6 +62,10 @@ public class UserUI {
     private void withdrawMoney() {
         System.out.println("===========출금을 선택하셨습니다===========");
         Account account = showAccountsAndScanIdxAndGetAccount();
+        if(account == null) {
+            setMessage("잘못된 입력입니다.");
+            return;
+        }
         System.out.println("해당 계좌의 잔액: " + account.getAccountBalance());
         System.out.println("출금할 금액을 입력해주세요 : ");
         int money = scanAndGetParsedInt();
@@ -94,6 +99,10 @@ public class UserUI {
 
     private void showHistories() {
         Account account = showAccountsAndScanIdxAndGetAccount();
+        if(account == null) {
+            setMessage("잘못된 입력입니다.");
+            return;
+        }
         System.out.println("요청하신 계좌의 거래 내역입니다.");
         List<History> HistoryList = userLogic.getAccountHistory(account.getAccountNum());
         for (int i = 0; i < HistoryList.size(); i++) {
