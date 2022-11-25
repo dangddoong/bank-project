@@ -112,7 +112,8 @@ public class UserUI {
         String accountNum = accountList.get(accountChoiceNum-1).getAccountNum();
         List<History> HistoryList = userLogic.getAccountHistory(accountNum);
         for (int i = 0; i < HistoryList.size(); i++) {
-            System.out.println((i+1) + ". " + HistoryList.get(i));
+            History history = HistoryList.get(i);
+            System.out.println((i+1) + ". 거래시간: " + history.getTradeDate()+", 계좌번호: "+history.getAccountNum()+", 거래타입: "+history.getTradeType()+", 잔고: "+history.getMoney()+", 은행명: "+history.getBankName());
         }
 
     }
