@@ -3,14 +3,19 @@ package application;
 import data.AccountDB;
 import data.HistoryDB;
 import data.UserDB;
+
+import entity.User;
 import entity.Account;
 import entity.History;
-import entity.User;
+import src.entity.TradeType;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 
 public class UserLogic {
+
     UserDB userDB = UserDB.getInstance();
     AccountDB accountDB = AccountDB.getInstance();
     HistoryDB historyDB = HistoryDB.getInstance();
@@ -44,6 +49,7 @@ public class UserLogic {
         return user;
     }
 
+
     public void makeAccount(User loginUser) {
         Account account = new Account(loginUser.getUserID(), loginUser.getUserName());
         History history = new History(account.getAccountNum(), TradeType.계좌생성, "0", "조미김 은행");
@@ -52,5 +58,18 @@ public class UserLogic {
     public List<Account> getMyAccounts(User user) {
         List<Account> accounts = accountDB.getAllAccountByUserName(user.getUserName());
         return accounts;
+    }
+    public List<Account> findAccountInfo(User user){
+        List<Account> accounts = accountDB.getAllAccount().stream().
+                filter(id -> id.getUserID()
+                        .equals(user.getUserID()))
+                .collect(Collectors.toList());
+        return  accounts;
+    }
+
+    public History createWithdrawHistory(Account accounts, String money){
+        History history = new History(accounts.getAccountNum(), TradeType.출금, money,"조미김 은행");
+        historyDB.insertHistory(history);
+        return history;
     }
 }
