@@ -32,13 +32,13 @@ public class Account {
     public String getUserID(){ return userID;}
     public int getAccountBalance() {return accountBalance; }
 
-    public void depositMoney(Account account, int money){
-        account.accountBalance += money;
+    public void depositMoney(int money){
+        this.accountBalance += money;
     }
 
     // 잔고보다 출금금액이 큰 경우에 대한 if는 앞단에서 잡아주시는게 예외처리에 대한 값을 잡지 않아도 되서 편할듯합니다.
-    public void withdrawMoney(Account account, int money){
-        account.accountBalance -= money;
+    public void withdrawMoney(int money){
+        this.accountBalance -= money;
     }
 
 
