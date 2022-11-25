@@ -72,4 +72,8 @@ public class UserLogic {
         historyDB.insertHistory(history);
         return history;
     }
+
+    public List<History> getAccountHistory(String accountNum){
+        return historyDB.getAllHistoryListByAccountNum(accountNum);
+    }
 }

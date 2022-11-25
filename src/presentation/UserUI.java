@@ -86,6 +86,21 @@ public class UserUI {
     }
 
     private void showHistories() {
+        System.out.println("현재 소유하고 계신 계좌 목록입니다.");
+        List<Account> accountList = userLogic.getMyAccounts(loginUser);
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
+        }
+        System.out.println("계좌 거래 내역 조회 할 계좌의 순서번호를 입력해주세요.");
+        int accountChoiceNum = Integer.parseInt(scanner.nextLine());
+        System.out.println("요청하신 계좌의 거래 내역입니다.");
+        // 이거를 Logic에서 method 만들어가지고 쓰도록 한다.
+        String accountNum = accountList.get(accountChoiceNum-1).getAccountNum();
+        List<History> HistoryList = userLogic.getAccountHistory(accountNum);
+        for (int i = 0; i < HistoryList.size(); i++) {
+            System.out.println((i+1) + ". " + HistoryList.get(i));
+        }
+
     }
 
     private void makeAccount() {
