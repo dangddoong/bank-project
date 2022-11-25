@@ -42,7 +42,7 @@ public class UserLogic {
 
     public User login(String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
-        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 중복"));
         if (!user.getPassWord().equals(pw)) {
             throw new IllegalArgumentException("비밀번호 불일치");
         }
@@ -62,6 +62,30 @@ public class UserLogic {
         return accounts;
     }
 
+    public void depositMoney(int money, Account account) {
+        account.depositMoney(money);
+        String strMoney = String.valueOf(money);
+        History history = new History(account.getAccountNum(), TradeType.입금, strMoney, "조미김");
+        historyDB.insertHistory(history);
+    }
+
+    public List<History> getAccountHistory(String accountNum) {
+        return historyDB.getAllHistoryListByAccountNum(accountNum);
+    }
+
+    public boolean validateWithdrawAndDoLogic(Account account, int money) {
+        if(account.getAccountBalance() - money < 0) {
+            return false;
+        }
+        account.withdrawMoney(money);
+        String strMoney = String.valueOf(money);
+        History history = new History(account.getAccountNum(), TradeType.출금, strMoney, "조미김");
+        historyDB.insertHistory(history);
+        return true;
+    }
+}
+
+/*
     public List<Account> findAccountInfo(User user) {
         List<Account> accounts = accountDB.getAllAccount().stream().
                 filter(id -> id.getUserID()
@@ -75,15 +99,4 @@ public class UserLogic {
         historyDB.insertHistory(history);
         return history;
     }
-
-    public void depositMoney(int deposit, Account account) {
-        account.depositMoney(account, deposit);
-        String money = String.valueOf(deposit);
-        History history = new History(account.getAccountNum(), TradeType.입금, money, "조미김");
-        this.historyDB.insertHistory(history);
-    }
-
-    public List<History> getAccountHistory(String accountNum) {
-        return historyDB.getAllHistoryListByAccountNum(accountNum);
-    }
-}
+ */
