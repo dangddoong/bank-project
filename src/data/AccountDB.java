@@ -2,6 +2,8 @@ package data;
 
 import entity.Account;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AccountDB {
 
@@ -51,6 +53,11 @@ public class AccountDB {
             }
         }
         return null;
+    }
+
+    public List<Account> getAllAccountByUserName(String userName) {
+        List<Account> accounts = accountList.stream().filter(x -> x.getUserName().equals(userName)).collect(Collectors.toList());
+        return accounts;
     }
 
 //test
