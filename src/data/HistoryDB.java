@@ -17,6 +17,10 @@ public class HistoryDB {
     }
 
     //Account를 받으면 / History를 뱉어주는? / history
+    public void insertHistory(History history){
+        histories.add(history);
+    }
+
     public Optional<History> getHistory(String account) {
         for (History history : histories) {
             if (history.getAccountNum().equals(account)) {
@@ -30,7 +34,7 @@ public class HistoryDB {
         histories.stream()
                 .filter(a -> a.getAccountNum().equals(accountNum))
                 .collect(Collectors.toList())
-                .forEach(h->{histories.remove(h); } );
+                .forEach(h->{ histories.remove(h); } );
     }
 }
 

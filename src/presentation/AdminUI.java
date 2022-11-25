@@ -57,8 +57,9 @@ public class AdminUI {
         String id = scanner.nextLine();
         List<Account> userAccounts = adminLogic.getUserAccounts(id);
         System.out.println("해당 유저의 계좌는 다음과같습니다.");
-        for (int i = 0; i < userAccounts.size(); i++) {
-            System.out.println((i+1) + "계좌번호 : ");
+        int index = 1;
+        for (Account userAccount : userAccounts) {
+            System.out.printf(index + " : " + userAccount);
         }
         System.out.println("삭제를 원하는 계좌의 번호 입력해주세요: ");
         String idx = scanner.nextLine();

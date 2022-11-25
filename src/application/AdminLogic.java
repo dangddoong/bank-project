@@ -67,7 +67,9 @@ public class AdminLogic {
     }
 
     public User findUserByAccount(String userAccount){
-        Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
+        Optional<Account> first = accountDB.getAllAccount()
+                .stream().filter(account -> account.getAccountNum()
+                        .equals(userAccount)).findFirst();
         Account account = first.get();
         String userId = account.getUserID();
         Optional<User> opUser = userDB.getUserByUserId(userId);
