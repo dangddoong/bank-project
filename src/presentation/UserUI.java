@@ -132,17 +132,24 @@ public class UserUI {
         for (int i = 0; i < accountList.size(); i++) {
             System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
         }
-        System.out.println("계좌 거래 내역 조회 할 계좌의 순서번호를 입력해주세요.");
-        int accountChoiceNum = Integer.parseInt(scanner.nextLine());
-        System.out.println("요청하신 계좌의 거래 내역입니다.");
-        // 이거를 Logic에서 method 만들어가지고 쓰도록 한다.
-        String accountNum = accountList.get(accountChoiceNum-1).getAccountNum();
-        List<History> HistoryList = userLogic.getAccountHistory(accountNum);
-        for (int i = 0; i < HistoryList.size(); i++) {
-            System.out.println((i+1) + ". " + HistoryList.get(i));
+        try {
+            System.out.println("계좌 거래 내역 조회 할 계좌의 순서번호를 입력해주세요.");
+            int accountChoiceNum = Integer.parseInt(scanner.nextLine());
+            String accountNum = accountList.get(accountChoiceNum - 1).getAccountNum();
+            System.out.println("요청하신 계좌의 거래 내역입니다.");
+            List<History> HistoryList = userLogic.getAccountHistory(accountNum);
+            for (int i = 0; i < HistoryList.size(); i++) {
+                History history = HistoryList.get(i);
+                System.out.println((i + 1) + ". 거래시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래타입: " + history.getTradeType() + ", 잔고: " + history.getMoney() + ", 은행명: " + history.getBankName());
+            }
+        }catch (Exception e){
+            System.out.println("잘못 입력하셨습니다.");
+        }finally {
+            System.out.println("원래 화면으로 돌아가고 싶으시면 아무 키나 입력해주세요.");
+            scanner.nextLine();
+            }
         }
 
-    }
 
     private void makeAccount() {
         System.out.println("현재 소유하고 계신 계좌 목록입니다.");
