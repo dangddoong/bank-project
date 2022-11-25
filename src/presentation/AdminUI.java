@@ -15,7 +15,7 @@ public class AdminUI {
     User loginUser;
     String message = "";
 
-    public String adminApp(User user) {
+    public void adminApp(User user) {
         loginUser = user;
         while (true) {
             System.out.println(message);
@@ -37,7 +37,7 @@ public class AdminUI {
                 case "5" -> findAllAccounts();
                 case "6" -> findAllHistories();
                 case "0" -> {
-                    return "정상적으로 로그아웃 되었습니다!";
+                    return;
                 }
                 default -> message = "잘못된 입력입니다.";
             }

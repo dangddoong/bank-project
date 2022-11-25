@@ -12,11 +12,14 @@ public class UserUI {
     Scanner scanner = new Scanner(System.in);
     UserLogic userLogic = UserLogic.getInstance();
     User loginUser;
-    String message = "";
+    String message;
+    boolean isStop;
 
-    public String userApp(User user) {
+    public void userApp(User user) {
         loginUser = user;
-        while (true) {
+        isStop = false;
+        message = "";
+        while (! isStop) {
             System.out.println(message);
             System.out.println(loginUser.getUserName() + " 님 환영합니다!");
             System.out.println("==== 조미김 은행 회원 페이지 ====");
@@ -33,15 +36,18 @@ public class UserUI {
                 case "3" -> showAccountInfo();
                 case "4" -> showHistories();
                 case "5" -> makeAccount();
-                case "0" -> {
-                    return "정상적으로 로그아웃 되었습니다!";
-                }
+                case "0" -> isStop = true;
+                default -> message = "잘못된 입력입니다.";
             }
+
         }
     }
 
     private void depositMoney() {
         Account account = showAccountsAndScanIdxAndGetAccount();
+        if(account == null) {
+            return;
+        }
         System.out.print("입금액을 입력하세요. : ");
         int money = scanAndGetParsedInt();
         if(money == -1) {
@@ -131,14 +137,14 @@ public class UserUI {
         int idx = scanAndGetParsedInt();
         if(idx == -1) {
             setMessage("잘못된 입력입니다.");
-            userApp(loginUser);
+            return null;
         }
         Account account = null;
         try {
             account = accounts.get(idx - 1);
         } catch (Exception e) {
             setMessage("잘못된 입력입니다.");
-            userApp(loginUser);
+            return null;
         }
         return account;
     }

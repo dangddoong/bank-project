@@ -42,7 +42,7 @@ public class UserLogic {
 
     public User login(String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
-        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 중복"));
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
         if (!user.getPassWord().equals(pw)) {
             throw new IllegalArgumentException("비밀번호 불일치");
         }

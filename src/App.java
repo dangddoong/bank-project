@@ -6,6 +6,8 @@ import presentation.UserUI;
 
 import java.util.Scanner;
 
+import static printer.Printer.*;
+
 public class App {
     static Scanner scanner = new Scanner(System.in);
     static String message = "";
@@ -16,93 +18,100 @@ public class App {
 
     public static void main(String[] args) {
         initData();
-        while(true) {
-            System.out.println(message);
-            System.out.println("======= 조미김 은행에 오신걸 환영합니다 =======");
-            System.out.println("1. 회원 가입");
-            System.out.println("2. 로그인");
-            System.out.println("0. 프로그램 종료");
-            System.out.println("=============================================");
-            System.out.print("원하시는 작업을 입력해주세요: ");
+        while (true) {
+            clearCmd();
+            println(BLANK + message);
+            println(BLANK + HEADER_HOME);
+            println(BLANK + LIST_HOME1);
+            println(BLANK + LIST_HOME2);
+            println(BLANK + LIST_HOME0);
+            println(BLANK + FOOTER);
+            print(BLANK + ENTER_TASK_NUM);
             switch (scanner.nextLine()) {
                 case "1" -> signUp();
                 case "2" -> login();
                 case "0" -> System.exit(0);
-                default -> System.out.println("프로그램을 종료합니다.");
+                default -> message = MESSAGE_WRONG_INPUT;
             }
         }
     }
 
     static void initData() {
-        userLogic.signUp("cheolsoo", "cheolsoo", "cheolsoo");
-        userLogic.signUp("minhee", "minhee", "cheolsoo");
-        userLogic.signUp("minsoo", "minsoo", "minsoo");
-        userLogic.signUp("sohee", "sohee", "sohee");
-        adminLogic.signUp("admin_sparta", "admin_sparta", "admin_sparta");
-        adminLogic.signUp("admin_korea", "admin_korea", "admin_korea");
+        userLogic.signUp("김철수", "cheolsoo", "cheolsoo");
+        userLogic.signUp("강민희", "minhee", "cheolsoo");
+        userLogic.signUp("이민수", "minsoo", "minsoo");
+        userLogic.signUp("르탄이", "sparta", "sparta");
+        adminLogic.signUp("슈퍼르탄이", "admin_sparta", "admin_sparta");
+        adminLogic.signUp("은행 지점장", "admin_bank", "admin_bank");
     }
 
     static void signUp() {
-        System.out.println("회원가입 진행");
-        System.out.println("이름 입력");
+        clearCmd();
+        println(BLANK + HEADER_SIGN_UP);
+        print(BLANK + ENTER_NAME);
         String name = scanner.nextLine();
-        System.out.println("아이디 입력");
+        print(BLANK + ENTER_ID);
         String id = scanner.nextLine();
-        System.out.println("비밀번호 입력");
+        print(BLANK + ENTER_PW);
         String pw = scanner.nextLine();
-        if (id.startsWith("admin_")) {
+        if (id.startsWith(ADMIN_PREFIX)) {
             try {
-                message = adminLogic.signUp(name, id, pw);
+                adminLogic.signUp(name, id, pw);
+                message = MESSAGE_SUCCESS_SIGNUP;
             } catch (Exception e) {
-                if (e.getMessage().equals("아이디 중복")) {
-                    message = "아이디가 중복되었습니다!";
+                if (e.getMessage().equals(EXCEPTION_DOUBLE_ID)) {
+                    message = MESSAGE_DOUBLE_ID;
                 } else {
-                    message = "잘못된 입력입니다!";
+                    message = MESSAGE_WRONG_INPUT;
                 }
             }
         } else {
             try {
                 message = userLogic.signUp(name, id, pw);
+                message = MESSAGE_SUCCESS_SIGNUP;
             } catch (Exception e) {
-                if (e.getMessage().equals("아이디 중복")) {
-                    message = "아이디가 중복되었습니다!";
+                if (e.getMessage().equals(EXCEPTION_DOUBLE_ID)) {
+                    message = MESSAGE_DOUBLE_ID;
                 } else {
-                    message = "잘못된 입력입니다!";
+                    message = MESSAGE_WRONG_INPUT;
                 }
             }
         }
     }
 
     static void login() {
-        System.out.println("로그인 진행");
-        System.out.println("아이디 입력");
+        clearCmd();
+        println(BLANK + HEADER_LOGIN);
+        print(BLANK + ENTER_ID);
         String id = scanner.nextLine();
-        System.out.println("비밀번호 입력");
+        print(BLANK + ENTER_PW);
         String pw = scanner.nextLine();
-        if (id.startsWith("admin_")) {
+        if (id.startsWith(ADMIN_PREFIX)) {
             try {
                 User user = adminLogic.login(id, pw);
-                message = adminUI.adminApp(user);
+                adminUI.adminApp(user);
+                message = MESSAGE_SUCCESS_LOGOUT;
             } catch (Exception e) {
-                if (e.getMessage().equals("아이디 중복")) {
-                    message = "아이디가 중복되었습니다!";
-                } else if(e.getMessage().equals("비밀번호 불일치")) {
-                    message = "비밀번호가 틀렸습니다!";
+                if (e.getMessage().equals(EXCEPTION_NO_ID)) {
+                    message = MESSAGE_NO_ID;
+                } else if (e.getMessage().equals(EXCEPTION_WRONG_PW)) {
+                    message = MESSAGE_WRONG_PW;
                 } else {
-                    message = "잘못된 입력입니다!";
+                    message = MESSAGE_WRONG_INPUT;
                 }
             }
         } else {
             try {
                 User user = userLogic.login(id, pw);
-                message = userUI.userApp(user);
+                userUI.userApp(user);
+                message = MESSAGE_SUCCESS_LOGOUT;
             } catch (Exception e) {
-                if (e.getMessage().equals("아이디 중복")) {
-                    message = "아이디가 중복되었습니다!";
-                } else if(e.getMessage().equals("비밀번호 불일치")) {
-                    message = "비밀번호가 틀렸습니다!";
+                if (e.getMessage().equals(EXCEPTION_NO_ID)) {
+                    message = MESSAGE_NO_ID;
+                } else if (e.getMessage().equals(EXCEPTION_WRONG_PW)) {
+                    message = MESSAGE_WRONG_PW;
                 } else {
-                    message = "잘못된 입력입니다!";
+                    message = MESSAGE_WRONG_INPUT;
                 }
             }
         }
