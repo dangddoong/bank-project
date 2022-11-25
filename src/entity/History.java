@@ -3,6 +3,9 @@ package entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
+
+import entity.Account;
 
 public class History {
     //거래 일자랑 시간을 date로 성형해서 찍기
@@ -36,9 +39,7 @@ public class History {
         return tradeTime;
     }
 
-    public String getAccountNum() {
-        return accountNum;
-    }
+    public String getHistoryAccount(){ return accountNum; }
 
     public String getIsTraded() {
         return isTraded;
