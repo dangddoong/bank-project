@@ -1,7 +1,7 @@
 package entity;
 
 public class Account {
-    private int accountNumCount = 1231212345;
+    private static int accountNumCount = 1231212345;
     private int accountBalance;
     private String userID;
     private String accountNum;

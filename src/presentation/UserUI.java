@@ -83,6 +83,18 @@ public class UserUI {
     }
 
     private void showAccountInfo() {
+        System.out.println("사용자 정보입니다");
+        System.out.println("사용자 아이디 :" + loginUser.getUserID());
+        System.out.println("사용자 이름 : " + loginUser.getUserName());
+        System.out.println("사용자 계좌 정보입니다.");
+        List<Account> accountList = userLogic.getMyAccounts(loginUser);
+        for (int i = 0; i < accountList.size(); i++) {
+            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum());
+        }
+        System.out.println("다시 보시려면 y 를 입력해주세요.");
+        if(scanner.nextLine().equals("y")) {
+            showAccountInfo();
+        }
     }
 
     private void showHistories() {
@@ -97,7 +109,9 @@ public class UserUI {
         System.out.println("계좌를 새로 생성하시려면 y 를 입력해주세요: ");
         if(scanner.nextLine().equals("y")) {
             userLogic.makeAccount(loginUser);
+            message = "정상적으로 처리되었습니다.";
+            return;
         }
-        message = "정상적으로 처리되었습니다.";
+        message = "생성 취소";
     }
 }

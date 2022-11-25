@@ -52,7 +52,9 @@ public class UserLogic {
 
     public void makeAccount(User loginUser) {
         Account account = new Account(loginUser.getUserID(), loginUser.getUserName());
+        accountDB.insertAccount(account);
         History history = new History(account.getAccountNum(), TradeType.계좌생성, "0", "조미김 은행");
+        historyDB.insertHistory(history);
     }
 
     public List<Account> getMyAccounts(User user) {
