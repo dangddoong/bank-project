@@ -60,7 +60,7 @@ public class AdminUI {
             System.out.println("해당 유저의 계좌는 다음과같습니다.");
             int index = 1;
             for (Account userAccount : userAccounts) {
-                System.out.println(index + " : " + userAccount.toString());
+                System.out.println(index + " : " + userAccount.getAccountNum());
             }
             System.out.print("삭제를 원하는 계좌의 순서 번호 입력해주세요: ");
             String idx = scanner.nextLine();
