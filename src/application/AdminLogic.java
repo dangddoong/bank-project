@@ -66,7 +66,7 @@ public class AdminLogic {
 
     public String chooseAccount(List<Account> accounts, String num) {
         int index = 0;
-        Account[] accountArray = (Account[]) accounts.toArray();    //여기 주의 오류 위험
+        Account[] accountArray = (Account[]) accounts.toArray();   //여기 주의 오류 위험
         for (Account account : accounts) {
             if (Integer.parseInt(num) == index) {
                 break;
