@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class UserDB {
+    private static final UserDB instance = new UserDB();
+    public static UserDB getInstance() {
+        return instance;
+    }
     private ArrayList<User> userList = new ArrayList<>();
 
     // 유저 등록( DB에 넣기)

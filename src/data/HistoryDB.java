@@ -32,5 +32,9 @@ public class HistoryDB {
                 .collect(Collectors.toList())
                 .forEach(h->{histories.remove(h); } );
     }
+
+    public void insertHistory(History history) {
+        histories.add(history);
+    }
 }
 

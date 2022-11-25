@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 
 public class AdminLogic {
-    UserDB userDB = new UserDB();
+    UserDB userDB = UserDB.getInstance();
     AccountDB accountDB = new AccountDB();
     HistoryDB historyDB = new HistoryDB();
 
