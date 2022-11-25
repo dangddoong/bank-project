@@ -64,6 +64,9 @@ public class AdminLogic {
                 .stream()
                 .filter(i -> i.getUserID().equals(id))
                 .collect(Collectors.toList());
+        if(accounts.isEmpty()){
+            throw new IllegalArgumentException("계좌가 없습니다");
+        }
         return accounts;
     }
 

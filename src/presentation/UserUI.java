@@ -63,7 +63,7 @@ public class UserUI {
         try {
             History history = userLogic.createWithdrawHistory(accounts.get(Integer.parseInt(num) -1) , money);
             System.out.println("입급에 성공하셨습니다.");
-            System.out.print("현재 잔액 : ");
+            System.out.print("현재 잔액 : " + history.getMoney() + "원");
 
         }catch(Exception e){
             String string = e.getMessage();
