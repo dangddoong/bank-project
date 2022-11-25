@@ -2,14 +2,14 @@ package entity;
 
 public class Account {
     private int accountNumCount = 1231212345;
-    private int accountDeposit ;
+    private int accountBalance;
     private String userID;
     private String accountNum;
     private String userName;
 
     public Account(String userID, String userName) {
         this.accountNum = makeAccountNum();
-        this.accountDeposit = 0;
+        this.accountBalance = 0;
         this.userName = userName;
         this.userID = userID;
     }
@@ -28,6 +28,17 @@ public class Account {
     }
     public String getUserName() {
         return userName;
+    }
+    public String getUserID(){ return userID;}
+    public int getAccountBalance() {return accountBalance; }
+
+    public void depositMoney(Account account, int money){
+        account.accountBalance += money;
+    }
+
+    // 잔고보다 출금금액이 큰 경우에 대한 if는 앞단에서 잡아주시는게 예외처리에 대한 값을 잡지 않아도 되서 편할듯합니다.
+    public void withdrawMoney(Account account, int money){
+        account.accountBalance -= money;
     }
 
 

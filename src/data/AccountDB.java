@@ -1,8 +1,6 @@
 package data;
 
 import entity.Account;
-import entity.User;
-
 import java.util.ArrayList;
 
 public class AccountDB {
@@ -16,6 +14,11 @@ public class AccountDB {
 
     public void insertAccount(Account account){
         accountList.add(account);
+    }
+
+    // 계좌 삭제
+    public void deleteAccount(Account account){
+        accountList.remove(account);
     }
 
     public ArrayList<Account> getAllAccount(){
