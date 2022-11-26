@@ -29,6 +29,9 @@ public class AccountDB {
     public List<Account> getAllAccountByUserName(String userName) {
         return accountList.stream().filter(x -> x.getUserName().equals(userName)).collect(Collectors.toList());
     }
+    public List<Account> getAllAccountByUserID(String userID) {
+        return accountList.stream().filter(x -> x.getUserName().equals(userID)).collect(Collectors.toList());
+    }
 }
 
 //    private int maxAccountID = 0;

@@ -54,9 +54,8 @@ public class AdminUI {
 
     private void deleteAccount() {
         System.out.print("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
-        String id = scanner.nextLine();
         try{
-            List<Account> userAccounts = adminLogic.getUserAccounts(id);
+            List<Account> userAccounts = adminLogic.getUserAccountsByID(scanner.nextLine());
             System.out.println("해당 유저의 계좌는 다음과같습니다.");
             for (int i = 0; i < userAccounts.size(); i++) {
                 System.out.println(i + 1 + " : " + userAccounts.get(i).getAccountNum() );
@@ -139,7 +138,7 @@ public class AdminUI {
 
 }
 
-//1
+
 //사용자 id와 변경할 비밀번호 필요
 
 

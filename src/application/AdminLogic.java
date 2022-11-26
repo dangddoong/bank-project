@@ -68,6 +68,13 @@ public class AdminLogic {
         }
         return accounts;
     }
+    public List<Account> getUserAccountsByID(String userID){
+        List<Account> accounts = accountDB.getAllAccountByUserID(userID);
+        if(accounts.isEmpty()){
+            throw new IllegalArgumentException("해당 유저의 계좌가 없습니다");
+        }
+        return accounts;
+    }
 
     public void deleteAccount(Account account) {
         accountDB.deleteAccount(account);
