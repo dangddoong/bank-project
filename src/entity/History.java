@@ -14,15 +14,18 @@ public class History {
     private int money;
     //은행명 //받아서 쓰는걸로 할 거 같네요 - 고정할 것이냐 받아올 것이냐
     private String bankName;
+    //입금출금 후 계좌 잔고
+    private int accountBalance;
 
     //format으로 LocalDateTime 바꿔야 합니다.
 
-    public History(String accountNum, TradeType tradeType, int money, String bankName) {
+    public History(String accountNum, int accountBalance, TradeType tradeType, int money, String bankName) {
         this.tradeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.accountNum = accountNum;
         this.tradeType = tradeType;
         this.money = money;
         this.bankName = bankName;
+        this.accountBalance = accountBalance;
     }
 
     public String getTradeDate() {
@@ -36,6 +39,7 @@ public class History {
     public String getAccountNum() {
         return accountNum;
     }
+    public int getAccountBalance(){return accountBalance;}
 
     public String getHistoryAccount(){ return accountNum; }
 

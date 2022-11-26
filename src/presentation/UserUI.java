@@ -120,10 +120,8 @@ public class UserUI {
             System.out.println(BLANK + (i + 1) + ". 거래타입: " + history.getTradeType() +
                     ", 거래시간: " + history.getTradeDate() +
                     ", 거래 금액: " + history.getMoney() +
-                    ", 잔고: " + history.getMoney() + // TODO: 2022/11/25 잔고도 출력되도록
+                    ", 계좌 잔고: " + history.getAccountBalance() +
                     ", 은행명: " + history.getBankName());
-//                                               ", 계좌번호: " + history.getAccountNum(); TODO: 몇번계좌인지 이미선택했는데 나와야하나?
-
         }
         println(BLANK + FOOTER);
         print(BLANK + ENTER_ZERO_TO_BACK);
