@@ -8,89 +8,97 @@ import entity.User;
 import java.util.List;
 import java.util.Scanner;
 
+import static printer.Printer.*;
+
 public class UserUI {
     Scanner scanner = new Scanner(System.in);
     UserLogic userLogic = UserLogic.getInstance();
     User loginUser;
     String message;
-    boolean isStop;
 
     public void userApp(User user) {
         loginUser = user;
-        isStop = false;
         message = "";
-        while (! isStop) {
-            System.out.println(message);
-            System.out.println(loginUser.getUserName() + " 님 환영합니다!");
-            System.out.println("==== 조미김 은행 회원 페이지 ====");
-            System.out.println("1. 입금하기");
-            System.out.println("2. 출금하기");
-            System.out.println("3. 계좌 정보 조회하기");
-            System.out.println("4. 계좌 거래 내역 조회하기");
-            System.out.println("5. 계좌 생성하기");
-            System.out.println("0. 로그아웃");
-            System.out.println("===================================");
+        while (true) {
+            clearCmd();
+            println(BLANK + message);
+            println(BLANK + BLANK_HALF + loginUser.getUserName() + HEADER_USER_WELCOME);
+            println(BLANK + HEADER_USER);
+            println(BLANK + USER_LIST1);
+            println(BLANK + USER_LIST2);
+            println(BLANK + USER_LIST3);
+            println(BLANK + USER_LIST4);
+            println(BLANK + USER_LIST5);
+            println(BLANK + USER_LIST0);
+            println(BLANK + FOOTER);
+            print(BLANK + ENTER_TASK_NUM);
             switch (scanAndGetString()) {
                 case "1" -> depositMoney();
                 case "2" -> withdrawMoney();
                 case "3" -> showAccountInfo();
                 case "4" -> showHistories();
                 case "5" -> makeAccount();
-                case "0" -> isStop = true;
-                default -> message = "잘못된 입력입니다.";
+                case "0" -> {
+                    return;
+                }
+                default -> setMessage(MESSAGE_WRONG_INPUT);
             }
 
         }
     }
 
     private void depositMoney() {
+        clearCmd();
+        println(BLANK + HEADER_DEPOSIT);
         Account account = showAccountsAndScanIdxAndGetAccount();
-        if(account == null) {
-            setMessage("잘못된 입력입니다.");
+        if (account == null) {
+            setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
-        System.out.print("입금액을 입력하세요. : ");
+        System.out.print(BLANK + ENTER_MONEY);
         int money = scanAndGetParsedInt();
-        if(money == -1) {
-            setMessage("잘못된 입력입니다.");
+        if (money == -1) {
+            setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
         userLogic.depositMoney(money, account);
-        setMessage("정상적으로 처리되었습니다.");
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void withdrawMoney() {
-        System.out.println("===========출금을 선택하셨습니다===========");
+        clearCmd();
+        println(BLANK + HEADER_WITHDRAW);
         Account account = showAccountsAndScanIdxAndGetAccount();
         if(account == null) {
-            setMessage("잘못된 입력입니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
-        System.out.println("해당 계좌의 잔액: " + account.getAccountBalance());
-        System.out.println("출금할 금액을 입력해주세요 : ");
+        println(BLANK + ACCOUNT_BLANCE + account.getAccountBalance());
+        print(BLANK + ENTER_MONEY);
         int money = scanAndGetParsedInt();
         if(money == -1) {
-            setMessage("잘못된 입력입니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
         if(userLogic.validateWithdrawAndDoLogic(account, money)) {
-            setMessage("정상적으로 처리되었습니다.");
+            setMessage(MESSAGE_SUCCESS_LOGIC);
         } else {
-            setMessage("잔액이 부족합니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
         }
     }
 
     private void showAccountInfo() {
-        System.out.println("===사용자 정보 페이지입니다.===");
-        System.out.println("사용자 아이디 :" + loginUser.getUserID());
-        System.out.println("사용자 이름 : " + loginUser.getUserName());
-        System.out.println("사용자 계좌 정보입니다.");
+        clearCmd();
+        println(BLANK + HEADER_SHOW_ACCOUNT_INFO);
+        println(BLANK + USER_ID + loginUser.getUserID());
+        println(BLANK + USER_NAME + loginUser.getUserName());
+        println(BLANK + ACCOUNT_LIST);
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.println((i+1) + ". " + accountList.get(i).getAccountNum() +
-                    ", 잔액 : " + accountList.get(i).getAccountBalance());
+            println(BLANK + (i+1) + ". " + accountList.get(i).getAccountNum() + BALANCE + accountList.get(i).getAccountBalance());
         }
-        System.out.print("뒤로 돌아가시려면 0을 입력해주세요: ");
+        println(BLANK + FOOTER);
+        print(BLANK + ENTER_ZERO_TO_BACK);
         if(scanAndGetString().equals("0")) {
             return;
         }
@@ -98,61 +106,69 @@ public class UserUI {
     }
 
     private void showHistories() {
+        clearCmd();
         Account account = showAccountsAndScanIdxAndGetAccount();
         if(account == null) {
-            setMessage("잘못된 입력입니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
-        System.out.println("요청하신 계좌의 거래 내역입니다.");
+        clearCmd();
+        println(BLANK + HISTORY_LIST);
         List<History> HistoryList = userLogic.getAccountHistory(account.getAccountNum());
         for (int i = 0; i < HistoryList.size(); i++) {
             History history = HistoryList.get(i);
-            System.out.println((i + 1) + ". 거래타입: " + history.getTradeType() +
-                                         ", 거래시간: " + history.getTradeDate() +
-                                         ", 거래 금액: " + history.getMoney() +
-                                         ", 잔고: " + history.getMoney() + // TODO: 2022/11/25 잔고도 출력되도록
-                                         ", 은행명: " + history.getBankName());
-//                                       ", 계좌번호: " + history.getAccountNum(); TODO: 몇번계좌인지 이미선택했는데 나와야하나?
+            System.out.println(BLANK + (i + 1) + ". 거래타입: " + history.getTradeType() +
+                                                 ", 거래시간: " + history.getTradeDate() +
+                                                 ", 거래 금액: " + history.getMoney() +
+                                                 ", 잔고: " + history.getMoney() + // TODO: 2022/11/25 잔고도 출력되도록
+                                                 ", 은행명: " + history.getBankName());
+//                                               ", 계좌번호: " + history.getAccountNum(); TODO: 몇번계좌인지 이미선택했는데 나와야하나?
 
         }
-        System.out.println("뒤로 가고싶으시면 0을 입력해주세요");
+        println(BLANK + FOOTER);
+        print(BLANK + ENTER_ZERO_TO_BACK);
         if (! scanAndGetString().equals("0")) {
             showHistories();
         }
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void makeAccount() {
-        System.out.println("현재 소유하고 계신 계좌 목록입니다.");
+        clearCmd();
+        println(BLANK + HEADER_MAKE_ACCOUNT);
+        println(BLANK + ACCOUNT_LIST);
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            System.out.println((i + 1) + ". " + accountList.get(i).getAccountNum());
+            System.out.println(BLANK + (i + 1) + ". " + accountList.get(i).getAccountNum());
         }
-        System.out.print("계좌를 새로 생성하시려면 y 를 입력해주세요: ");
+        println(BLANK + FOOTER);
+        print(BLANK + ENTER_Y_TO_MAKE_ACCOUNT);
         if (scanAndGetString().equals("y")) {
             userLogic.makeAccount(loginUser);
-            setMessage("요청이 정상적으로 처리되었습니다!");
+            setMessage(MESSAGE_SUCCESS_LOGIC);
             return;
         }
-        message = "요청이 취소되었습니다!";
+        setMessage(MESSAGE_STOP_LOGIC);
     }
 
     private Account showAccountsAndScanIdxAndGetAccount() {
-        System.out.println("소유하고 계신 계좌 목록입니다.");
+        System.out.println(BLANK + ACCOUNT_LIST);
         List<Account> accounts = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accounts.size(); i++) {
-            System.out.println((i + 1) + ". " + accounts.get(i).getAccountNum());
+            System.out.println(BLANK + (i + 1) + ". " + accounts.get(i).getAccountNum());
         }
-        System.out.print("처리를 진행할 계좌의 번호를 선택하세요 : ");
+        System.out.println(BLANK + FOOTER);
+        System.out.print(BLANK + ENTER_ACCOUNT);
         int idx = scanAndGetParsedInt();
         if(idx == -1) {
-            setMessage("잘못된 입력입니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
             return null;
         }
         Account account = null;
         try {
             account = accounts.get(idx - 1);
         } catch (Exception e) {
-            setMessage("잘못된 입력입니다.");
+            setMessage(MESSAGE_WRONG_INPUT);
             return null;
         }
         return account;
