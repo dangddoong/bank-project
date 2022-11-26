@@ -59,7 +59,7 @@ public class Printer {
     public static final String ENTER_MONEY = "☑️ 처리할 금액을 입력해주세요: ";
     public static final String ENTER_ACCOUNT = "☑️ 처리할 계좌의 번호를 입력해주세요: ";
     public static final String ENTER_ZERO_TO_BACK = "☑️ 뒤로 가시려면 0 을 입력해주세요: ";
-    public static final String ENTER_Y_TO_MAKE_ACCOUNT = "☑️ 정말 계좌를 만드시려면 y 를 입력해주세요: ";
+    public static final String ENTER_Y_TO_MAKE_ACCOUNT = "☑️ 계좌를 추가로 만드시려면 y 를 입력해주세요: ";
 
     public static final String MESSAGE_SUCCESS_LOGIC =           "                   \uD83D\uDFE2 요청이 정상적으로 처리되었습니다 \uD83D\uDFE2";
     public static final String MESSAGE_STOP_LOGIC =           "                           \uD83D\uDD34 요청이 중단 되었습니다 \uD83D\uDD34";
