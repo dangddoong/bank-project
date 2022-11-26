@@ -45,6 +45,7 @@ public class AdminUI {
     }
 
     private void changeUserPassword() {
+        findAllUserID();
         System.out.println("변경하려는 유저 id 입력해주세요");
         String userId = scanner.nextLine();
         System.out.println("새로운 비밀번호를 입력해주세요");
@@ -53,6 +54,7 @@ public class AdminUI {
     }
 
     private void deleteAccount() {
+        findAllUserID();
         System.out.print("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
         try{
             List<Account> userAccounts = adminLogic.getUserAccountsByID(scanner.nextLine());
@@ -81,10 +83,16 @@ public class AdminUI {
     }
 
     private void findUserByAccountNumber() {
+        System.out.println("은행 내 모든 유저 계좌입니다.");
+        ArrayList<Account> accounts = adminLogic.getAllAcounts();
+        for (Account account : accounts) {
+            System.out.println("사용자 계좌 번호: " + account.getAccountNum());
+        }
+
         System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
         String accountNumber = scanner.nextLine();
         User user = adminLogic.findUserByAccount(accountNumber);
-        System.out.println("계좌번호의 소유자는 : " + user.getUserName() + "님입니다.");
+        System.out.println("계좌번호의 소유자:" + user.getUserName() + ". ID:" + user.getUserID());
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
             findUserByAccountNumber();
@@ -92,6 +100,7 @@ public class AdminUI {
     }
 
     private void findAccountsByUserId() {
+        findAllUserID();
         System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
         String userId = scanner.nextLine();
         try {
@@ -115,7 +124,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 계좌 리스트입니다.");
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("사용자명 : " + account.getUserID()+ " 계좌 : " + account.getAccountNum());
+            System.out.println("사용자명: " + account.getUserID()+ ", 계좌: " + account.getAccountNum());
         }
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
@@ -128,14 +137,20 @@ public class AdminUI {
         System.out.println("은행 내 모든 거래내역 리스트입니다.");
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println(history.getTradeDate() + " 계좌번호 : " + history.getAccountNum() + " 거래 내역: " + history.getTradeType());
+            System.out.println("거래 시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래 내역: " + history.getTradeType());
         }
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
             findAllHistories();
         }
     }
-
+    private void findAllUserID() {
+        System.out.println("은행 내 모든 유저 아이디입니다.");
+        ArrayList<Account> accounts = adminLogic.getAllAcounts();
+        for (Account account : accounts) {
+            System.out.println("사용자명 : " + account.getUserID());
+        }
+    }
 }
 
 
