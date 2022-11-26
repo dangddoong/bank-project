@@ -137,7 +137,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 거래내역 리스트입니다.");
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println("거래 시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래 내역: " + history.getTradeType());
+            System.out.println(history);
         }
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {

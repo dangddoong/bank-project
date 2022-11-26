@@ -32,7 +32,7 @@ public class User {
     }
 
     public void changeUserPassword(String pw) {
-        this.passWord = pw;
+        passWord = pw;
     }
 }
 

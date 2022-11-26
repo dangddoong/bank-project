@@ -51,6 +51,6 @@ public class History {
     }
 
     public String toString(){
-        return "거래 일자 : " + "거래 시간 : " + tradeType + "액 : " + money + "은행명 : " + bankName;
+        return "거래 일자 : " + tradeDate.split("T")[0] +   "거래 시간 : " + tradeDate.split("T")[1] + tradeType + " : " + money + "잔액 : "+ "필드 필요" + "은행명 : " + bankName;
     }
 }
