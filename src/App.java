@@ -10,7 +10,7 @@ import static printer.Printer.*;
 
 public class App {
     static Scanner scanner = new Scanner(System.in);
-    static String message = "";
+    static String message;
     static UserLogic userLogic = UserLogic.getInstance();
     static AdminLogic adminLogic = AdminLogic.getInstance();
     static UserUI userUI = new UserUI();
@@ -18,6 +18,7 @@ public class App {
 
     public static void main(String[] args) {
         initData();
+        message = "";
         while (true) {
             clearCmd();
             println(BLANK + message);
