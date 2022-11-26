@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static printer.Printer.*;
+
 public class AdminUI {
     Scanner scanner = new Scanner(System.in);
     AdminLogic adminLogic = AdminLogic.getInstance();
@@ -18,17 +20,19 @@ public class AdminUI {
     public void adminApp(User user) {
         loginUser = user;
         while (true) {
-            System.out.println(message);
-            System.out.println(loginUser.getUserName() + " 관리자님 환영합니다!");
-            System.out.println("==== 조미김 은행 관리자 페이지 ====");
-            System.out.println("1. 사용자 정보 수정");
-            System.out.println("2. 유저의 계좌 정보 삭제");
-            System.out.println("3. 계좌번호로 사용자 찾기");
-            System.out.println("4. 소유자명으로 계좌 찾기");
-            System.out.println("5. 은행 내 모든 계좌 조회");
-            System.out.println("6. 은행 내 모든 거래 내역 조회");
-            System.out.println("0. 로그아웃");
-            System.out.println("===================================");
+            clearCmd();
+            println(BLANK + message);
+            println(BLANK + BLANK_HALF + loginUser.getUserName() + ADMIN_WELCOME_SUFFIX);
+            println(BLANK + HEADER_ADMIN);
+            println(BLANK + ADMIN_LIST1);
+            println(BLANK + ADMIN_LIST2);
+            println(BLANK + ADMIN_LIST3);
+            println(BLANK + ADMIN_LIST4);
+            println(BLANK + ADMIN_LIST5);
+            println(BLANK + ADMIN_LIST6);
+            println(BLANK + ADMIN_LIST0);
+            println(BLANK + FOOTER);
+            print(BLANK + ENTER_TASK_NUM);
             switch (scanner.nextLine()) {
                 case "1" -> changeUserPassword();
                 case "2" -> deleteAccount();
@@ -39,117 +43,169 @@ public class AdminUI {
                 case "0" -> {
                     return;
                 }
-                default -> message = "잘못된 입력입니다.";
+                default -> message = MESSAGE_WRONG_INPUT;
             }
         }
     }
 
     private void changeUserPassword() {
+        clearCmd();
+        println(BLANK + HEADER_CHANGE_PASSWORD);
         findAllUserID();
-        System.out.println("변경하려는 유저 id 입력해주세요");
-        String userId = scanner.nextLine();
-        System.out.println("새로운 비밀번호를 입력해주세요");
-        String newPassword = scanner.nextLine();
+        print(BLANK + ENTER_USER_ID);
+        String userId = scanAndGetString();
+        try {
+            adminLogic.confirmId(userId);
+        } catch (Exception e) {
+            setMessage(MESSAGE_WRONG_INPUT);
+            return;
+        }
+        print(BLANK + ENTER_NEW_PW);
+        String newPassword = scanAndGetString();
         adminLogic.changeUserPw(userId, newPassword);
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void deleteAccount() {
+        clearCmd();
+        println(BLANK + HEADER_DELETE_ACCOUNT);
         findAllUserID();
-        System.out.print("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
-        try{
-            List<Account> userAccounts = adminLogic.getUserAccountsByID(scanner.nextLine());
-            System.out.println("해당 유저의 계좌는 다음과같습니다.");
-            for (int i = 0; i < userAccounts.size(); i++) {
-                System.out.println(i + 1 + " : " + userAccounts.get(i).getAccountNum() );
-            }
-            System.out.print("삭제를 원하는 계좌의 순서 번호 입력해주세요: ");
-            String idx = scanner.nextLine();
-
-            System.out.println("삭제하시려면 y 를 눌러주세요");
-            if (scanner.nextLine().equals("y")){
-            Account account = userAccounts.get(Integer.parseInt(idx) - 1);
-            adminLogic.deleteAccount(account);
-            System.out.println("삭제 완료됐습니다.");}
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+        print(BLANK + ENTER_USER_ID_ACCOUNT);
+        String userId = scanAndGetString();
+        List<Account> userAccounts;
+        try {
+            userAccounts = adminLogic.getUserAccountsByID(userId);
+        } catch (Exception e) {
+            setMessage(MESSAGE_NO_ACCOUNT);
+            return;
         }
-        finally {
-            System.out.println("뒤로가려면 0, 다시 삭제하려면 아무 키나 입력해주세요.");
-            if (!scanner.nextLine().equals("0")) {
-                deleteAccount();
-            }
+        println(BLANK + userId + IS_ACCOUNT_LIST);
+        for (int i = 0; i < userAccounts.size(); i++) {
+            println(BLANK + (i + 1) + ". " + userAccounts.get(i).getAccountNum());
+        }
+        print(BLANK + ENTER_ACCOUNT);
+        int idx = scanAndGetParsedInt();
+        Account account;
+        try {
+            account = userAccounts.get(idx - 1);
+        } catch (Exception e) {
+            setMessage(MESSAGE_WRONG_INPUT);
+            return;
+        }
+        if(idx == -1) {
+            setMessage(MESSAGE_WRONG_INPUT);
+            return;
+        }
+        print(BLANK + ENTER_Y_TO_DELETE);
+        if (scanner.nextLine().equals("y")) {
+            adminLogic.deleteAccount(account);
+            setMessage(MESSAGE_SUCCESS_LOGIC);
+        } else {
+            setMessage(MESSAGE_STOP_LOGIC);
         }
     }
 
     private void findUserByAccountNumber() {
-        System.out.println("은행 내 모든 유저 계좌입니다.");
+        clearCmd();
+        println(BLANK + HEADER_FIND_USER);
+        println(BLANK + ALL_ACCOUNT);
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("사용자 계좌 번호: " + account.getAccountNum());
+            println(BLANK + USER_ACCOUNT + account.getAccountNum());
         }
+        print(BLANK + ENTER_ACCOUNT_USER_ID);
+        String accountNumber = scanAndGetString();
 
-        System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
-        String accountNumber = scanner.nextLine();
-        User user = adminLogic.findUserByAccount(accountNumber);
-        System.out.println("계좌번호의 소유자:" + user.getUserName() + ". ID:" + user.getUserID());
-        System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
-        if ( !scanner.nextLine().equals("0")) {
-            findUserByAccountNumber();
+        User user;
+        try {
+            user = adminLogic.findUserByAccount(accountNumber);
+        } catch (Exception e) {
+            setMessage(MESSAGE_WRONG_INPUT);
+            return;
         }
+        println(BLANK + "계좌번호의 소유자:" + user.getUserName() + ", ID:" + user.getUserID());
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void findAccountsByUserId() {
+        clearCmd();
+        println(BLANK + HEADER_FIND_ACCOUNT);
         findAllUserID();
-        System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
-        String userId = scanner.nextLine();
-        try {
-            System.out.println(userId + "님의 계좌 목룍입니다.");
-            List<Account> accountList = adminLogic.getUserAccounts(userId);
-            for (Account account : accountList) {
-                System.out.println(account.getAccountNum());
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }finally {
-                System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
-                if (!scanner.nextLine().equals("0")) {
-                    findAccountsByUserId();
-            }
-        }
+        print(BLANK + ENTER_USER_ID_ACCOUNT);
+        String userId = scanAndGetString();
 
+        println(BLANK + userId + IS_ACCOUNT_LIST);
+        List<Account> accountList;
+        try {
+            accountList  = adminLogic.getUserAccounts(userId);
+        } catch (Exception e) {
+            setMessage(MESSAGE_WRONG_INPUT);
+            return;
+        }
+        for (int i = 0; i < accountList.size(); i++) {
+            println(BLANK +(i+1) + ". " + accountList.get(i).getAccountNum());
+        }
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void findAllAccounts() {
-        System.out.println("은행 내 모든 계좌 리스트입니다.");
+        clearCmd();
+        println(BLANK + HEADER_ALL_ACCOUNT);
+        println(BLANK + ALL_ACCOUNT);
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("사용자명: " + account.getUserID()+ ", 계좌: " + account.getAccountNum());
+            println(BLANK + "사용자명: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum());
         }
-        System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
-        if ( !scanner.nextLine().equals("0")) {
-            findUserByAccountNumber();
-        }
-
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void findAllHistories() {
-        System.out.println("은행 내 모든 거래내역 리스트입니다.");
+        clearCmd();
+        println(BLANK + HEADER_ALL_HISTORY);
+        println(BLANK + ALL_HISTORY);
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println("거래 시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래 내역: " + history.getTradeType());
+            println(BLANK + "거래 시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래 내역: " + history.getTradeType());
         }
-        System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
-        if ( !scanner.nextLine().equals("0")) {
-            findAllHistories();
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
+        setMessage(MESSAGE_SUCCESS_LOGIC);
+    }
+
+    public int scanAndGetParsedInt() {
+        String s = scanner.nextLine();
+        int idx = 0;
+        try {
+            idx = Integer.parseInt(s);
+            if (idx <= 0) {
+                return -1;
+            }
+        } catch (Exception e) {
+            return -1;
+        }
+        return idx;
+    }
+
+    private void findAllUserID() {
+        println(BLANK + ALL_USER_ID);
+        List<User> accounts = adminLogic.getAllUsers();
+        for (User account : accounts) {
+            println(BLANK + USER_ID + account.getUserID());
         }
     }
-    private void findAllUserID() {
-        System.out.println("은행 내 모든 유저 아이디입니다.");
-        ArrayList<Account> accounts = adminLogic.getAllAcounts();
-        for (Account account : accounts) {
-            System.out.println("사용자명 : " + account.getUserID());
-        }
+
+    private void setMessage(String s) {
+        message = s;
+    }
+
+    private String scanAndGetString() {
+        return scanner.nextLine();
     }
 }
 
