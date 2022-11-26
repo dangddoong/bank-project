@@ -85,7 +85,7 @@ public class AdminUI {
         System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
         String accountNumber = scanner.nextLine();
         User user = adminLogic.findUserByAccount(accountNumber);
-        System.out.println("계좌버호의 소유자는 : " + user.getUserName() + "님입니다.");
+        System.out.println("계좌번호의 소유자는 : " + user.getUserName() + "님입니다.");
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
             findUserByAccountNumber();
