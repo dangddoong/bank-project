@@ -32,7 +32,7 @@ public class AccountDB {
     }
 
     public List<Account> getAllAccountByUserID(String userID) {
-        return accountList.stream().filter(x -> x.getUserName().equals(userID)).collect(Collectors.toList());
+        return accountList.stream().filter(x -> x.getUserID().equals(userID)).collect(Collectors.toList());
     }
 }
 
