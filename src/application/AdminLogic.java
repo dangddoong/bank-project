@@ -50,12 +50,11 @@ public class AdminLogic {
         return opUser;
     }
 
-    public String changeUserPw(String id, String pw) {
+    public void changeUserPw(String id, String pw) {
         Optional<User> user = confirmId(id);
         User foundUser = user.get();
         foundUser.changeUserPassword(pw);
-        String message = "비밀번호 변경 완료";
-        return message;
+        System.out.println("비밀번호 변경 완료");
     }
 
     public List<Account> getUserAccounts(String id) {
