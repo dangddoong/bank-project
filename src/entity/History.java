@@ -11,13 +11,13 @@ public class History {
     //입급 출급 여부 - 판별값 보내서 화인
     private TradeType tradeType;
     //유저가 넣어준 금액
-    private String money;
+    private int money;
     //은행명 //받아서 쓰는걸로 할 거 같네요 - 고정할 것이냐 받아올 것이냐
     private String bankName;
 
     //format으로 LocalDateTime 바꿔야 합니다.
 
-    public History(String accountNum, TradeType tradeType, String money, String bankName) {
+    public History(String accountNum, TradeType tradeType, int money, String bankName) {
         this.tradeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.accountNum = accountNum;
         this.tradeType = tradeType;
@@ -40,7 +40,7 @@ public class History {
     public String getHistoryAccount(){ return accountNum; }
 
 
-    public String getMoney() {
+    public int getMoney() {
         return money;
     }
 
