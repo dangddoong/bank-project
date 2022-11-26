@@ -98,11 +98,8 @@ public class UserUI {
             println(BLANK + (i + 1) + ". " + accountList.get(i).getAccountNum() + BALANCE + accountList.get(i).getAccountBalance());
         }
         println(BLANK + FOOTER);
-        print(BLANK + ENTER_ZERO_TO_BACK);
-        if (scanAndGetString().equals("0")) {
-            return;
-        }
-        showAccountInfo();
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
     }
 
     private void showHistories() {
@@ -124,10 +121,8 @@ public class UserUI {
                     ", 은행명: " + history.getBankName());
         }
         println(BLANK + FOOTER);
-        print(BLANK + ENTER_ZERO_TO_BACK);
-        if (!scanAndGetString().equals("0")) {
-            showHistories();
-        }
+        print(BLANK + ENTER_ANYKEY_TO_BACK);
+        scanAndGetString();
         setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
@@ -141,7 +136,7 @@ public class UserUI {
         }
         println(BLANK + FOOTER);
         if(userLogic.getMyAccounts(loginUser).size() == 5){
-          setMessage(MESSAGE_No_More_Account);
+          setMessage(MESSAGE_NO_MORE_ACCOUNT);
             return;
         }
         print(BLANK + ENTER_Y_TO_MAKE_ACCOUNT);
@@ -166,7 +161,7 @@ public class UserUI {
             setMessage(MESSAGE_WRONG_INPUT);
             return null;
         }
-        Account account = null;
+        Account account;
         try {
             account = accounts.get(idx - 1);
         } catch (Exception e) {
@@ -186,7 +181,7 @@ public class UserUI {
 
     public int scanAndGetParsedInt() {
         String s = scanner.nextLine();
-        int idx = 0;
+        int idx;
         try {
             idx = Integer.parseInt(s);
             if (idx <= 0) {

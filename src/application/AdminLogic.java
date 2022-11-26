@@ -18,20 +18,19 @@ public class AdminLogic {
     AccountDB accountDB = AccountDB.getInstance();
     HistoryDB historyDB = HistoryDB.getInstance();
 
-    private static AdminLogic adminLogic = new AdminLogic();
+    private static final AdminLogic adminLogic = new AdminLogic();
 
     public static AdminLogic getInstance() {
         return adminLogic;
     }
 
-    public String signUp(String name, String id, String pw) {
+    public void signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isPresent()) {
             throw new IllegalArgumentException("아이디 중복");
         }
         User user = new User(id, pw, name, true);
         userDB.insertUser(user);
-        return "정상적으로 회원가입 되었습니다!";
     }
 
     public User login(String id, String pw) {
@@ -53,9 +52,11 @@ public class AdminLogic {
 
     public void changeUserPw(String id, String pw) {
         Optional<User> user = confirmId(id);
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("아이디 없음");
+        }
         User foundUser = user.get();
         foundUser.changeUserPassword(pw);
-        System.out.println("비밀번호 변경 완료");
     }
 
     public List<Account> getUserAccounts(String id) {
@@ -81,25 +82,34 @@ public class AdminLogic {
     }
 
     public User findUserByAccount(String userAccount) {
-        Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
-        Account account = first.get();
-        String userId = account.getUserID();
-        Optional<User> opUser = userDB.getUserByUserId(userId);
-        User user = opUser.get();
-        return user;
+        Optional<Account> OpAccount = accountDB.getAccountByAccountNumber(userAccount);
+        if (OpAccount.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 계좌");
+        }
+        return userDB.getUserByUserId(OpAccount.get().getUserID()).get();
     }
 
-    public ArrayList<Account> getAllAcounts() {
-        ArrayList<Account> allAccounts = accountDB.getAllAccount();
-        return allAccounts;
+    public ArrayList<Account> getAllAccounts() {
+        return accountDB.getAllAccount();
     }
 
     public ArrayList<History> getAllHistories() {
-        ArrayList<History> histories = historyDB.getAllHistory();
-        return histories;
+        return historyDB.getAllHistory();
+    }
+
+    public List<User> getAllUsers() {
+        return userDB.getAllUsers();
+
     }
 }
-
+/*
+    Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
+    Account account = first.get();
+    String userId = account.getUserID();
+    Optional<User> opUser = userDB.getUserByUserId(userId);
+    User user = opUser.get();
+        return user;
+*/
    /* public Optional<Account> confirmAccount(String userAccount){
         AccountDB accountDB = new AccountDB();
         for (Account account : accountDB) {
