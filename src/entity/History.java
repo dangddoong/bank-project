@@ -49,4 +49,8 @@ public class History {
     public String getBankName() {
         return bankName;
     }
+
+    public String toString(){
+        return "거래 일자 : " + "거래 시간 : " + tradeType + "액 : " + money + "은행명 : " + bankName;
+    }
 }
