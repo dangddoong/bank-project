@@ -53,6 +53,7 @@ public class AdminUI {
     }
 
     private void deleteAccount() {
+        findAllUserID();
         System.out.print("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
         String id = scanner.nextLine();
         try{
@@ -93,6 +94,7 @@ public class AdminUI {
     }
 
     private void findAccountsByUserId() {
+        findAllUserID();
         System.out.println("찾으려는 계좌의 유저 아이디를 입력해주세요: ");
         String userId = scanner.nextLine();
         try {
@@ -136,6 +138,14 @@ public class AdminUI {
             findAllHistories();
         }
     }
+    private void findAllUserID() {
+        System.out.println("은행 내 모든 유저 아이디입니다.");
+        ArrayList<Account> accounts = adminLogic.getAllAcounts();
+        for (Account account : accounts) {
+            System.out.println("사용자명 : " + account.getUserID());
+        }
+    }
+
 
 }
 
