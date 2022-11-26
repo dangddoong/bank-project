@@ -45,7 +45,7 @@ public class Printer {
 
     public static final String USER_LIST1 =                      "                              1️⃣ 입금하기";
     public static final String USER_LIST2 =                      "                              2️⃣ 출금하기";
-    public static final String USER_LIST3 =                      "                              3️⃣ 계좌 정보 조회하기";
+    public static final String USER_LIST3 =                      "                              3️⃣ 사용자 정보 조회하기";
     public static final String USER_LIST4 =                      "                              4️⃣ 계좌 거래 내역 조회하기";
     public static final String USER_LIST5 =                      "                              5️⃣ 계좌 만들기";
     public static final String USER_LIST0 =                      "                              0️⃣ 로그아웃";
