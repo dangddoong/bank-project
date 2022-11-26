@@ -72,7 +72,8 @@ public class AdminUI {
             System.out.println("해당 유저의 계좌는 다음과같습니다.");
             int index = 1;
             for (Account userAccount : userAccounts) {
-                System.out.println(index + " : " + userAccount.toString());
+                System.out.println(index + " : " + userAccount.getAccountNum());
+                index++;
             }
             System.out.print("삭제를 원하는 계좌의 순서 번호 입력해주세요: ");
             String idx = scanner.nextLine();
@@ -95,7 +96,7 @@ public class AdminUI {
             System.out.println("찾으시려는 유저의 계좌 번호를 입력해주세요: ");
             String accountNumber = scanner.nextLine();
             User user = adminLogic.findUserByAccount(accountNumber);
-            System.out.println("계좌버호의 소유자는 : " + user + "님입니다.");
+            System.out.println("계좌버호의 소유자는 : " + user.getUserID() + "님입니다.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -111,8 +112,10 @@ public class AdminUI {
             try {
                 System.out.println(userId + "님의 계좌 목룍입니다.");
                 List<Account> accountList = adminLogic.getUserAccounts(userId);
+                int index = 1;
                 for (Account account : accountList) {
-                    System.out.println(account.toString());
+                    System.out.println(account.getAccountNum());
+                    index++;
                 }
             }catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -128,7 +131,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 계좌 리스트입니다.");
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("account = " + account.toString());
+            System.out.println("account = " + account.getAccountNum());
         }
         System.out.println("zero to back");
 
@@ -138,7 +141,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 거래내역 리스트입니다.");
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println(histories.toString());
+            System.out.println(history.toString());
         }
         System.out.println("zero to back");
     }

@@ -48,4 +48,9 @@ public class History {
     public String getBankName() {
         return bankName;
     }
+
+    public String toString(){
+        return  String.format("%s %s %s %s", this.accountNum, this.tradeType, this.money, this.bankName);
+    }
+
 }
