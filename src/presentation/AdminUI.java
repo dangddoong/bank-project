@@ -109,7 +109,7 @@ public class AdminUI {
         clearCmd();
         println(BLANK + HEADER_FIND_USER);
         println(BLANK + ALL_ACCOUNT);
-        ArrayList<Account> accounts = adminLogic.getAllAcounts();
+        ArrayList<Account> accounts = adminLogic.getAllAccounts();
         for (Account account : accounts) {
             println(BLANK + USER_ACCOUNT + account.getAccountNum());
         }
@@ -156,7 +156,7 @@ public class AdminUI {
         clearCmd();
         println(BLANK + HEADER_ALL_ACCOUNT);
         println(BLANK + ALL_ACCOUNT);
-        ArrayList<Account> accounts = adminLogic.getAllAcounts();
+        ArrayList<Account> accounts = adminLogic.getAllAccounts();
         for (Account account : accounts) {
             println(BLANK + "사용자명: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum());
         }
@@ -180,7 +180,7 @@ public class AdminUI {
 
     public int scanAndGetParsedInt() {
         String s = scanner.nextLine();
-        int idx = 0;
+        int idx;
         try {
             idx = Integer.parseInt(s);
             if (idx <= 0) {
