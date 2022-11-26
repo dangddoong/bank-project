@@ -3,7 +3,9 @@ package data;
 import entity.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserDB {
     private static final UserDB userDB = new UserDB();
@@ -27,6 +29,10 @@ public class UserDB {
             }
         }
         return Optional.ofNullable(findUser);
+    }
+
+    public List<User> getAllUsers() {
+        return userList.stream().filter(x -> !x.isAdmin()).collect(Collectors.toList());
     }
 }
 
