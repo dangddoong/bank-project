@@ -32,7 +32,7 @@ public class UserLogic {
             throw new IllegalArgumentException("아이디 중복");
         }
         User user = new User(id, pw, name, false);
-        Account account = new Account(user.getUserID(), user.getUserName());
+        Account account = new Account(user.getUserID(), user.getUserName(), 0);
         History history = new History(account.getAccountNum(), TradeType.계좌생성, "0", "조미김");
         userDB.insertUser(user);
         accountDB.insertAccount(account);
@@ -51,7 +51,8 @@ public class UserLogic {
 
 
     public void makeAccount(User loginUser) {
-        Account account = new Account(loginUser.getUserID(), loginUser.getUserName());
+        int countAc = accountDB.getAllAccountByUserID(loginUser.getUserID()).size();
+        Account account = new Account(loginUser.getUserID(), loginUser.getUserName(), countAc);
         accountDB.insertAccount(account);
         History history = new History(account.getAccountNum(), TradeType.계좌생성, "0", "조미김 은행");
         historyDB.insertHistory(history);
