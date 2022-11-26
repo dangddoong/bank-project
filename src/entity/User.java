@@ -34,6 +34,10 @@ public class User {
     public void changeUserPassword(String pw) {
         passWord = pw;
     }
+
+    public String toString(){
+        return "유저 아이디 : " + userID + "이름 : " + userName;
+    }
 }
 
 
