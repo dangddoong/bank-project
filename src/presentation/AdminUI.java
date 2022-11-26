@@ -158,7 +158,7 @@ public class AdminUI {
         println(BLANK + ALL_ACCOUNT);
         ArrayList<Account> accounts = adminLogic.getAllAccounts();
         for (Account account : accounts) {
-            println(BLANK + "사용자명: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum());
+            println(BLANK +"사용자명: "+ account.getUserName()+ ", 사용자ID: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum());
         }
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
