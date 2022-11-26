@@ -76,14 +76,14 @@ public class Printer {
     public static final String HEADER_ADMIN =                    "                          \uD83D\uDCB0 조미김 은행 관리자 페이지 \uD83D\uDCB0";
     public static final String HEADER_CHANGE_PASSWORD =          "                         \uD83D\uDCB0 사용자 비밀번호 변경 페이지 \uD83D\uDCB0";
     public static final String HEADER_DELETE_ACCOUNT =           "                           \uD83D\uDCB0 사용자 계좌 삭제 페이지 \uD83D\uDCB0";
-    public static final String HEADER_FIND_USER =                "                        \uD83D\uDCB0 계좌번호로 사용자 찾기 페이지 \uD83D\uDCB0";
+    public static final String HEADER_FIND_USER =                "                        \uD83D\uDCB0 계좌번호로 계좌 찾기 페이지 \uD83D\uDCB0";
     public static final String HEADER_FIND_ACCOUNT =                "                      \uD83D\uDCB0 사용자 ID로 계좌 찾기 페이지 \uD83D\uDCB0";
     public static final String HEADER_ALL_ACCOUNT =              "                            \uD83D\uDCB0 모든 계좌 조회 페이지 \uD83D\uDCB0";
     public static final String HEADER_ALL_HISTORY =              "                          \uD83D\uDCB0 모든 거래 내역 조회 페이지 \uD83D\uDCB0";
 
     public static final String ADMIN_LIST1 =                     "                              1️⃣ 사용자 비밀번호 수정";
     public static final String ADMIN_LIST2 =                     "                              2️⃣ 사용자 계좌 삭제";
-    public static final String ADMIN_LIST3 =                     "                              3️⃣ 계좌번호로 사용자 찾기";
+    public static final String ADMIN_LIST3 =                     "                              3️⃣ 계좌번호로 계좌 찾기";
     public static final String ADMIN_LIST4 =                     "                              4️⃣ 사용자 ID로 계좌 찾기";
     public static final String ADMIN_LIST5 =                     "                              5️⃣ 은행 내 모든 계좌 조회";
     public static final String ADMIN_LIST6 =                     "                              6️⃣ 은행 내 모든 거래 내역 조회";
@@ -100,7 +100,7 @@ public class Printer {
     public static final String ENTER_USER_ID = "☑️ 변경하려는 유저 ID를 입력해주세요: ";
     public static final String ENTER_NEW_PW = "☑️ 새로운 비밀번호를 입력해주세요: ";
     public static final String ENTER_USER_ID_ACCOUNT = "☑️ 찾으려는 계좌를 가진 사용자의 ID를 입력해주세요: ";
-    public static final String ENTER_ACCOUNT_USER_ID = "☑️ 찾으려는 유저의 계좌번호를 입력해주세요: ";
+    public static final String ENTER_ACCOUNT_USER_ACCOUNTNUM = "☑️ 찾으려는 계좌의 계좌번호를 입력해주세요: ";
     public static final String ENTER_ANYKEY_TO_BACK = "☑️ 돌아가려면 아무 키나 입력해주세요: ";
 
     // AdminUI.java (관리자 페이지) 프린터 끝
