@@ -54,6 +54,8 @@ public class Printer {
     public static final String ACCOUNT_BLANCE =                    "\uD83D\uDCB5 해당 계좌의 잔액입니다: ";
     public static final String USER_ID =                    "\uD83D\uDCB5 사용자 아이디 : ";
     public static final String USER_NAME =                    "\uD83D\uDCB5 사용자 이름 : ";
+    public static final String USER_NAME_No_Emoji =                    " 사용자 이름 : ";
+
     public static final String BALANCE =                    ", 잔액: ";
 
     public static final String ENTER_MONEY = "☑️ 처리할 금액을 입력해주세요: ";

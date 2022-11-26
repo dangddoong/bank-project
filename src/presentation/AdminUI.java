@@ -196,7 +196,7 @@ public class AdminUI {
         println(BLANK + ALL_USER_ID);
         List<User> accounts = adminLogic.getAllUsers();
         for (User account : accounts) {
-            println(BLANK + USER_ID + account.getUserID());
+            println(BLANK + USER_ID + account.getUserID() +USER_NAME_No_Emoji+account.getUserName());
         }
     }
 
