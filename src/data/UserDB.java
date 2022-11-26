@@ -3,9 +3,9 @@ package data;
 import entity.User;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
+import static printer.Printer.EXCEPTION_NO_ID;
+
 
 public class UserDB {
     private static final UserDB userDB = new UserDB();
@@ -20,7 +20,7 @@ public class UserDB {
         userList.add(user);
     }
 
-    public Optional<User> getUserByUserId(String userId) {
+    public User getUserByUserId(String userId) throws IllegalArgumentException {
         User findUser = null;
         for (User user : userList) {
             if (user.getUserID().equals(userId)) {
@@ -28,11 +28,14 @@ public class UserDB {
                 break;
             }
         }
-        return Optional.ofNullable(findUser);
+        if (findUser == null){
+            throw new IllegalArgumentException("아이디 없음");
+        }
+        return findUser;
     }
 
-    public List<User> getAllUsers() {
-        return userList.stream().filter(x -> !x.isAdmin()).collect(Collectors.toList());
+    public ArrayList<User> getAllUsers() {
+        return userList;
     }
 }
 

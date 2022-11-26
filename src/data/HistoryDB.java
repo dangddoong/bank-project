@@ -24,13 +24,12 @@ public class HistoryDB {
     }
 
     public void deleteHistoriesByAccountNumber(String accountNum) {
-        histories.stream().filter(a -> a.getAccountNum().equals(accountNum)).toList().forEach(h -> histories.remove(h));
+        histories.stream().filter(a -> a.getAccountNum().equals(accountNum)).toList().forEach(histories::remove);
     }
 
     public List<History> getAllHistoryListByAccountNum(String accountNum) {
         return histories.stream().filter(x -> x.getAccountNum().equals(accountNum)).collect(Collectors.toList());
     }
-
 }
 
 // MEMO - 거래 내역은 거래 일자, 거래 시간, 계좌번호, 입금/출금 여부, 거래 금액, 은행 명으로 구성된다.

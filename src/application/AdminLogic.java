@@ -25,55 +25,34 @@ public class AdminLogic {
     }
 
     public void signUp(String name, String id, String pw) {
-        Optional<User> opUser = userDB.getUserByUserId(id);
-        if (opUser.isPresent()) {
+        User user = userDB.getUserByUserId(id);
+        if (user.getUserID().equals(id)) {
             throw new IllegalArgumentException("아이디 중복");
         }
-        User user = new User(id, pw, name, true);
-        userDB.insertUser(user);
+        User signUser = new User(id, pw, name, true);
+        userDB.insertUser(signUser);
     }
 
     public User login(String id, String pw) {
-        Optional<User> opUser = userDB.getUserByUserId(id);
-        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        User user = userDB.getUserByUserId(id);
         if (!user.getPassWord().equals(pw)) {
             throw new IllegalArgumentException("비밀번호 불일치");
         }
         return user;
     }
 
-    public Optional<User> confirmId(String id) {
-        Optional<User> opUser = userDB.getUserByUserId(id);
-        if (opUser.isEmpty()) {
-            throw new IllegalArgumentException("아이디 없음");
-        }
-        return opUser;
+    public User confirmId(String id) {
+        return userDB.getUserByUserId(id);
     }
 
     public void changeUserPw(String id, String pw) {
-        Optional<User> user = confirmId(id);
-        if (user.isEmpty()) {
-            throw new IllegalArgumentException("아이디 없음");
-        }
-        User foundUser = user.get();
-        foundUser.changeUserPassword(pw);
+        User user = confirmId(id);
+        user.changeUserPassword(pw);
     }
 
     public List<Account> getUserAccounts(String id) {
-        Optional<User> user = confirmId(id);
-        List<Account> accounts = accountDB.getAllAccount().stream().filter(i -> i.getUserID().equals(id)).collect(Collectors.toList());
-        if (accounts.isEmpty()) {
-            throw new IllegalArgumentException("계좌가 없습니다");
-        }
-        return accounts;
-    }
-
-    public List<Account> getUserAccountsByID(String userID) {
-        List<Account> accounts = accountDB.getAllAccountByUserID(userID);
-        if (accounts.isEmpty()) {
-            throw new IllegalArgumentException("해당 유저의 계좌가 없습니다");
-        }
-        return accounts;
+        confirmId(id);
+        return accountDB.getAllAccountByUserID(id);
     }
 
     public void deleteAccount(Account account) {
@@ -82,11 +61,8 @@ public class AdminLogic {
     }
 
     public User findUserByAccount(String userAccount) {
-        Optional<Account> OpAccount = accountDB.getAccountByAccountNumber(userAccount);
-        if (OpAccount.isEmpty()) {
-            throw new IllegalArgumentException("존재하지 않는 계좌");
-        }
-        return userDB.getUserByUserId(OpAccount.get().getUserID()).get();
+        Account OpAccount = accountDB.getAccountByAccountNumber(userAccount);
+        return userDB.getUserByUserId(OpAccount.getUserID());
     }
 
     public ArrayList<Account> getAllAccounts() {
@@ -97,9 +73,8 @@ public class AdminLogic {
         return historyDB.getAllHistory();
     }
 
-    public List<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() {
         return userDB.getAllUsers();
-
     }
 }
 /*

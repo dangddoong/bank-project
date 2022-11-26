@@ -28,12 +28,17 @@ public class AccountDB {
         return accountList;
     }
 
+
     public List<Account> getAllAccountByUserID(String userID) {
-        return accountList.stream().filter(x -> x.getUserID().equals(userID)).collect(Collectors.toList());
+        return accountList.stream().filter(x -> x.getAccountNum().equals(userID)).collect(Collectors.toList());
     }
 
-    public Optional<Account> getAccountByAccountNumber(String userAccount) {
-        return accountList.stream().filter(x -> x.getAccountNum().equals(userAccount)).findFirst();
+    public Account getAccountByAccountNumber(String userAccount) {
+        Optional<Account> account = accountList.stream().filter(x -> x.getAccountNum().equals(userAccount)).findFirst();
+        if(account.isEmpty()){
+            throw new IllegalArgumentException("계좌가 존재하지 않습니다.");
+        }
+        return account.get();
     }
 }
 
