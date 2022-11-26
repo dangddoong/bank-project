@@ -1,7 +1,5 @@
 package entity;
 
-import data.AccountDB;
-
 public class Account {
     private int accountBalance;
     private String userID;
