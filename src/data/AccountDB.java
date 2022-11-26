@@ -1,6 +1,7 @@
 package data;
 
 import entity.Account;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,21 +15,22 @@ public class AccountDB {
 
     private final ArrayList<Account> accountList = new ArrayList<>();
 
-    public void insertAccount(Account account){
+    public void insertAccount(Account account) {
         accountList.add(account);
     }
 
-    public void deleteAccount(Account account){
+    public void deleteAccount(Account account) {
         accountList.remove(account);
     }
 
-    public ArrayList<Account> getAllAccount(){
+    public ArrayList<Account> getAllAccount() {
         return accountList;
     }
 
     public List<Account> getAllAccountByUserName(String userName) {
         return accountList.stream().filter(x -> x.getUserName().equals(userName)).collect(Collectors.toList());
     }
+
     public List<Account> getAllAccountByUserID(String userID) {
         return accountList.stream().filter(x -> x.getUserName().equals(userID)).collect(Collectors.toList());
     }

@@ -24,9 +24,7 @@ public class HistoryDB {
     }
 
     public void deleteHistoriesByAccountNumber(String accountNum) {
-        histories.stream()
-                .filter(a -> a.getAccountNum().equals(accountNum)).toList()
-                .forEach(h -> histories.remove(h));
+        histories.stream().filter(a -> a.getAccountNum().equals(accountNum)).toList().forEach(h -> histories.remove(h));
     }
 
     public List<History> getAllHistoryListByAccountNum(String accountNum) {

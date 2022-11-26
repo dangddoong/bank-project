@@ -17,7 +17,7 @@ public class Account {
     private String makeAccountNum() {
         String accountNumCountToString = Integer.toString(accountNumCount);
         StringBuffer accountNumCountToStringBuffer = new StringBuffer(accountNumCountToString);
-        accountNumCountToStringBuffer.insert(2,"-").insert(4,"-");
+        accountNumCountToStringBuffer.insert(2, "-").insert(4, "-");
         String accountNum = accountNumCountToStringBuffer.toString();
         accountNumCount++;
         return accountNum;
@@ -26,23 +26,27 @@ public class Account {
     public String getAccountNum() {
         return accountNum;
     }
+
     public String getUserName() {
         return userName;
     }
-    public String getUserID(){ return userID;}
-    public int getAccountBalance() {return accountBalance; }
 
-    public void depositMoney(int money){
+    public String getUserID() {
+        return userID;
+    }
+
+    public int getAccountBalance() {
+        return accountBalance;
+    }
+
+    public void depositMoney(int money) {
         this.accountBalance += money;
     }
 
     // 잔고보다 출금금액이 큰 경우에 대한 if는 앞단에서 잡아주시는게 예외처리에 대한 값을 잡지 않아도 되서 편할듯합니다.
-    public void withdrawMoney(int money){
+    public void withdrawMoney(int money) {
         this.accountBalance -= money;
     }
-
-
-
 
 
 }

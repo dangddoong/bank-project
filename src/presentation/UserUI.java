@@ -69,18 +69,18 @@ public class UserUI {
         clearCmd();
         println(BLANK + HEADER_WITHDRAW);
         Account account = showAccountsAndScanIdxAndGetAccount();
-        if(account == null) {
+        if (account == null) {
             setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
         println(BLANK + ACCOUNT_BLANCE + account.getAccountBalance());
         print(BLANK + ENTER_MONEY);
         int money = scanAndGetParsedInt();
-        if(money == -1) {
+        if (money == -1) {
             setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
-        if(userLogic.validateWithdrawAndDoLogic(account, money)) {
+        if (userLogic.validateWithdrawAndDoLogic(account, money)) {
             setMessage(MESSAGE_SUCCESS_LOGIC);
         } else {
             setMessage(MESSAGE_WRONG_INPUT);
@@ -95,11 +95,11 @@ public class UserUI {
         println(BLANK + ACCOUNT_LIST);
         List<Account> accountList = userLogic.getMyAccounts(loginUser);
         for (int i = 0; i < accountList.size(); i++) {
-            println(BLANK + (i+1) + ". " + accountList.get(i).getAccountNum() + BALANCE + accountList.get(i).getAccountBalance());
+            println(BLANK + (i + 1) + ". " + accountList.get(i).getAccountNum() + BALANCE + accountList.get(i).getAccountBalance());
         }
         println(BLANK + FOOTER);
         print(BLANK + ENTER_ZERO_TO_BACK);
-        if(scanAndGetString().equals("0")) {
+        if (scanAndGetString().equals("0")) {
             return;
         }
         showAccountInfo();
@@ -108,7 +108,7 @@ public class UserUI {
     private void showHistories() {
         clearCmd();
         Account account = showAccountsAndScanIdxAndGetAccount();
-        if(account == null) {
+        if (account == null) {
             setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
@@ -118,16 +118,16 @@ public class UserUI {
         for (int i = 0; i < HistoryList.size(); i++) {
             History history = HistoryList.get(i);
             System.out.println(BLANK + (i + 1) + ". 거래타입: " + history.getTradeType() +
-                                                 ", 거래시간: " + history.getTradeDate() +
-                                                 ", 거래 금액: " + history.getMoney() +
-                                                 ", 잔고: " + history.getMoney() + // TODO: 2022/11/25 잔고도 출력되도록
-                                                 ", 은행명: " + history.getBankName());
+                    ", 거래시간: " + history.getTradeDate() +
+                    ", 거래 금액: " + history.getMoney() +
+                    ", 잔고: " + history.getMoney() + // TODO: 2022/11/25 잔고도 출력되도록
+                    ", 은행명: " + history.getBankName());
 //                                               ", 계좌번호: " + history.getAccountNum(); TODO: 몇번계좌인지 이미선택했는데 나와야하나?
 
         }
         println(BLANK + FOOTER);
         print(BLANK + ENTER_ZERO_TO_BACK);
-        if (! scanAndGetString().equals("0")) {
+        if (!scanAndGetString().equals("0")) {
             showHistories();
         }
         setMessage(MESSAGE_SUCCESS_LOGIC);
@@ -160,7 +160,7 @@ public class UserUI {
         System.out.println(BLANK + FOOTER);
         System.out.print(BLANK + ENTER_ACCOUNT);
         int idx = scanAndGetParsedInt();
-        if(idx == -1) {
+        if (idx == -1) {
             setMessage(MESSAGE_WRONG_INPUT);
             return null;
         }

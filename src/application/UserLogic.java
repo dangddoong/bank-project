@@ -3,15 +3,13 @@ package application;
 import data.AccountDB;
 import data.HistoryDB;
 import data.UserDB;
-
-import entity.User;
 import entity.Account;
 import entity.History;
-import src.entity.TradeType;
+import entity.TradeType;
+import entity.User;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 public class UserLogic {
@@ -74,7 +72,7 @@ public class UserLogic {
     }
 
     public boolean validateWithdrawAndDoLogic(Account account, int money) {
-        if(account.getAccountBalance() - money < 0) {
+        if (account.getAccountBalance() - money < 0) {
             return false;
         }
         account.withdrawMoney(money);

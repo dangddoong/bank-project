@@ -1,7 +1,5 @@
 package entity;
 
-import src.entity.TradeType;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

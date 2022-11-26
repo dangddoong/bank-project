@@ -1,10 +1,11 @@
 package application;
-import data.UserDB;
+
 import data.AccountDB;
 import data.HistoryDB;
+import data.UserDB;
+import entity.Account;
 import entity.History;
 import entity.User;
-import entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,18 +60,16 @@ public class AdminLogic {
 
     public List<Account> getUserAccounts(String id) {
         Optional<User> user = confirmId(id);
-        List<Account> accounts = accountDB.getAllAccount()
-                .stream()
-                .filter(i -> i.getUserID().equals(id))
-                .collect(Collectors.toList());
-        if(accounts.isEmpty()){
+        List<Account> accounts = accountDB.getAllAccount().stream().filter(i -> i.getUserID().equals(id)).collect(Collectors.toList());
+        if (accounts.isEmpty()) {
             throw new IllegalArgumentException("계좌가 없습니다");
         }
         return accounts;
     }
-    public List<Account> getUserAccountsByID(String userID){
+
+    public List<Account> getUserAccountsByID(String userID) {
         List<Account> accounts = accountDB.getAllAccountByUserID(userID);
-        if(accounts.isEmpty()){
+        if (accounts.isEmpty()) {
             throw new IllegalArgumentException("해당 유저의 계좌가 없습니다");
         }
         return accounts;
@@ -81,10 +80,8 @@ public class AdminLogic {
         historyDB.deleteHistoriesByAccountNumber(account.getAccountNum());
     }
 
-    public User findUserByAccount(String userAccount){
-        Optional<Account> first = accountDB.getAllAccount()
-                .stream().filter(account -> account.getAccountNum()
-                        .equals(userAccount)).findFirst();
+    public User findUserByAccount(String userAccount) {
+        Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
         Account account = first.get();
         String userId = account.getUserID();
         Optional<User> opUser = userDB.getUserByUserId(userId);

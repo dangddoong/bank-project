@@ -14,7 +14,7 @@ public class UserDB {
 
     private final ArrayList<User> userList = new ArrayList<>();
 
-    public void insertUser(User user){
+    public void insertUser(User user) {
         userList.add(user);
     }
 
