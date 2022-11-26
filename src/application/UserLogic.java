@@ -31,7 +31,7 @@ public class UserLogic {
         }
         User user = new User(id, pw, name, false);
         Account account = new Account(user.getUserID(), user.getUserName(), 0);
-        History history = new History(account.getAccountNum(),account.getAccountBalance(), TradeType.계좌생성, 0, "조미김");
+        History history = new History(account.getAccountNum(),account.getAccountBalance(), TradeType.생성, 0, "조미김");
         userDB.insertUser(user);
         accountDB.insertAccount(account);
         historyDB.insertHistory(history);
@@ -52,7 +52,7 @@ public class UserLogic {
         int countAc = accountDB.getAllAccountByUserID(loginUser.getUserID()).size();
         Account account = new Account(loginUser.getUserID(), loginUser.getUserName(), countAc);
         accountDB.insertAccount(account);
-        History history = new History(account.getAccountNum(),account.getAccountBalance(), TradeType.계좌생성, 0, "조미김 은행");
+        History history = new History(account.getAccountNum(),account.getAccountBalance(), TradeType.생성, 0, "조미김 은행");
         historyDB.insertHistory(history);
     }
 
