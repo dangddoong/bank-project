@@ -116,7 +116,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 계좌 리스트입니다.");
         ArrayList<Account> accounts = adminLogic.getAllAcounts();
         for (Account account : accounts) {
-            System.out.println("account = " + account.getAccountNum());
+            System.out.println("사용자명 : " + account.getUserID()+ " 계좌 : " + account.getAccountNum());
         }
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
@@ -129,7 +129,7 @@ public class AdminUI {
         System.out.println("은행 내 모든 거래내역 리스트입니다.");
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            System.out.println(history.getAccountNum());
+            System.out.println(history.getTradeDate() + " 계좌번호 : " + history.getAccountNum() + " 거래 내역: " + history.getTradeType());
         }
         System.out.println("뒤로가려면 0, 다시 찾으시려면 아무 키나 눌러주세요.");
         if ( !scanner.nextLine().equals("0")) {
