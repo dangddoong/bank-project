@@ -140,6 +140,10 @@ public class UserUI {
             System.out.println(BLANK + (i + 1) + ". " + accountList.get(i).getAccountNum());
         }
         println(BLANK + FOOTER);
+        if(userLogic.getMyAccounts(loginUser).size() == 5){
+          setMessage(MESSAGE_No_More_Account);
+            return;
+        }
         print(BLANK + ENTER_Y_TO_MAKE_ACCOUNT);
         if (scanAndGetString().equals("y")) {
             userLogic.makeAccount(loginUser);

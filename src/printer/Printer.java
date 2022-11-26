@@ -62,7 +62,8 @@ public class Printer {
     public static final String ENTER_Y_TO_MAKE_ACCOUNT = "☑️ 계좌를 추가로 만드시려면 y 를 입력해주세요: ";
 
     public static final String MESSAGE_SUCCESS_LOGIC =           "                   \uD83D\uDFE2 요청이 정상적으로 처리되었습니다 \uD83D\uDFE2";
-    public static final String MESSAGE_STOP_LOGIC =           "                           \uD83D\uDD34 요청이 중단 되었습니다 \uD83D\uDD34";
+    public static final String MESSAGE_STOP_LOGIC =              "                       \uD83D\uDD34 요청이 중단 되었습니다 \uD83D\uDD34";
+    public static final String MESSAGE_No_More_Account =         "                  \uD83D\uDD34 계좌는 5개 이상 만드실 수 없습니다 \uD83D\uDD34";
 
 
     // UserUI.java (유저 페이지) 프린터 끝

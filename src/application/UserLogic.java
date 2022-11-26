@@ -57,7 +57,7 @@ public class UserLogic {
     }
 
     public List<Account> getMyAccounts(User user) {
-        List<Account> accounts = accountDB.getAllAccountByUserName(user.getUserName());
+        List<Account> accounts = accountDB.getAllAccountByUserID(user.getUserID());
         return accounts;
     }
 
