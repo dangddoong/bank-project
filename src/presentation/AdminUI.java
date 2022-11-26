@@ -171,7 +171,7 @@ public class AdminUI {
         println(BLANK + ALL_HISTORY);
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            println(BLANK + "거래 시간: " + history.getTradeDate() + ", 계좌번호: " + history.getAccountNum() + ", 거래 내역: " + history.getTradeType());
+            println(BLANK + "거래 타입: " + history.getTradeType() + ", 거래시간: " + history.getTradeDate() + ", 거래 금액: " + history.getMoney()+ ", 계좌 잔고: "+history.getAccountBalance()+", 계좌번호: "+history.getAccountNum());
         }
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
