@@ -81,12 +81,12 @@ public class AdminLogic {
         historyDB.deleteHistoriesByAccountNumber(account.getAccountNum());
     }
 
-    public Account findAccountsByAccountNum(String userAccountNum) {
-        Optional<Account> OpAccount = accountDB.getAccountByAccountNumber(userAccountNum);
+    public User findUserByAccount(String userAccount) {
+        Optional<Account> OpAccount = accountDB.getAccountByAccountNumber(userAccount);
         if (OpAccount.isEmpty()) {
             throw new IllegalArgumentException("존재하지 않는 계좌");
         }
-        return OpAccount.get();
+        return userDB.getUserByUserId(OpAccount.get().getUserID()).get();
     }
 
     public ArrayList<Account> getAllAccounts() {
