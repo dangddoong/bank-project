@@ -1,5 +1,6 @@
 import application.AdminLogic;
 import application.UserLogic;
+import entity.Account;
 import entity.User;
 import presentation.AdminUI;
 import presentation.UserUI;
@@ -37,12 +38,23 @@ public class App {
     }
 
     static void initData() {
+        User user = new User("sparta", "sparta", "르탄이", false);
+
         userLogic.signUp("김철수", "cheolsoo", "cheolsoo");
         userLogic.signUp("강민희", "minhee", "cheolsoo");
         userLogic.signUp("이민수", "minsoo", "minsoo");
-        userLogic.signUp("르탄이", "sparta", "sparta");
+        Account account = userLogic.signUp(user.getUserName(), user.getUserID(), user.getPassWord());
         adminLogic.signUp("슈퍼르탄이", "admin_sparta", "admin_sparta");
         adminLogic.signUp("은행 지점장", "admin_bank", "admin_bank");
+        userLogic.depositMoney(5000, account);
+        userLogic.validateWithdrawAndDoLogic(account, 500);
+        userLogic.makeAccount(user);
+        userLogic.makeAccount(user);
+        userLogic.depositMoney(30000, account);
+        userLogic.depositMoney(2000, account);
+        userLogic.validateWithdrawAndDoLogic(account, 5000);
+        userLogic.depositMoney(7000, account);
+        userLogic.validateWithdrawAndDoLogic(account, 20000);
     }
 
     static void signUp() {
@@ -67,7 +79,7 @@ public class App {
             }
         } else {
             try {
-                message = userLogic.signUp(name, id, pw);
+                userLogic.signUp(name, id, pw);
                 message = MESSAGE_SUCCESS_SIGNUP;
             } catch (Exception e) {
                 if (e.getMessage().equals(EXCEPTION_DOUBLE_ID)) {

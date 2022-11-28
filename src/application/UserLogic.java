@@ -24,7 +24,7 @@ public class UserLogic {
         return userLogic;
     }
 
-    public String signUp(String name, String id, String pw) {
+    public Account signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isPresent()) {
             throw new IllegalArgumentException("아이디 중복");
@@ -35,7 +35,7 @@ public class UserLogic {
         userDB.insertUser(user);
         accountDB.insertAccount(account);
         historyDB.insertHistory(history);
-        return "정상적으로 회원가입 되었습니다!";
+        return account;
     }
 
     public User login(String id, String pw) {
