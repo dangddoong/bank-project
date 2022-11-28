@@ -17,7 +17,10 @@
 
 ### 03. 팀원 소개 및 역할
 
+조씨, 이씨, 김씨가 모여서 '조이김'
 
+시적 허용을 활용해 '조미김'으로 정했습니다. 
+<img src = "https://m.convenii.com/web/upload/NNEditor/20210303/CON09361_shop1_135945.jpg">
 
 | 이름   | 역할            | 
 |------|---------------|
@@ -66,4 +69,4 @@
 
 ### 06. 관련 링크
 
-<a href="https://giant-honeycrisp-305.notion.site/6901a11fdc3d45349e38f0171c85dacb"> 개발 일지 노션 </a>
+<a href="https://polydactyl-count-920.notion.site/or-599109d6482f46e68a2fb4fa8ff77c33"> 개발 일지 노션 </a>
