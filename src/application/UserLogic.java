@@ -11,6 +11,9 @@ import entity.User;
 import java.util.List;
 import java.util.Optional;
 
+import static printer.Printer.EXCEPTION_NO_ID;
+import static printer.Printer.EXCEPTION_WRONG_PW;
+
 
 public class UserLogic {
 
@@ -25,7 +28,6 @@ public class UserLogic {
     }
 
     public String signUp (String name, String id, String pw) {
-        try {
             User opUser = userDB.getUserByUserId(id);
             if (opUser.getUserID().equals(id)) {
                 throw new IllegalArgumentException("아이디 중복");
@@ -37,18 +39,16 @@ public class UserLogic {
             accountDB.insertAccount(account);
             historyDB.insertHistory(history);
 
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return "정상적으로 회원가입 되었습니다!";
     }
 
 
-    public User login(String id, String pw) {
+    public User login(String id, String pw){
         User user = userDB.getUserByUserId(id);
-        if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException("비밀번호 불일치");
+        if(user.getUserID().equals("")){
+            throw new IllegalArgumentException(EXCEPTION_NO_ID);
+        }else if (!user.getPassWord().equals(pw)) {
+            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
         }
         return user;
     }
