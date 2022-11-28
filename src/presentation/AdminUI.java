@@ -36,7 +36,7 @@ public class AdminUI {
             switch (scanner.nextLine()) {
                 case "1" -> changeUserPassword();
                 case "2" -> deleteAccount();
-                case "3" -> findUserByAccountNumber();
+                case "3" -> findAccountsByAccountNumber();
                 case "4" -> findAccountsByUserId();
                 case "5" -> findAllAccounts();
                 case "6" -> findAllHistories();
@@ -105,7 +105,7 @@ public class AdminUI {
         }
     }
 
-    private void findUserByAccountNumber() {
+    private void findAccountsByAccountNumber() {
         clearCmd();
         println(BLANK + HEADER_FIND_USER);
         println(BLANK + ALL_ACCOUNT);
@@ -113,17 +113,16 @@ public class AdminUI {
         for (Account account : accounts) {
             println(BLANK + USER_ACCOUNT + account.getAccountNum());
         }
-        print(BLANK + ENTER_ACCOUNT_USER_ID);
+        print(BLANK + ENTER_ACCOUNT_USER_ACCOUNTNUM);
         String accountNumber = scanAndGetString();
 
-        User user;
         try {
-            user = adminLogic.findUserByAccount(accountNumber);
+            Account account = adminLogic.findAccountsByAccountNum(accountNumber);
+            println(BLANK +"사용자명: "+ account.getUserName()+ ", 사용자ID: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum()+", 계좌 잔고: "+ account.getAccountBalance());
         } catch (Exception e) {
             setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
-        println(BLANK + "계좌번호의 소유자:" + user.getUserName() + ", ID:" + user.getUserID());
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
         setMessage(MESSAGE_SUCCESS_LOGIC);
