@@ -140,7 +140,7 @@ public class AdminUI {
         try {
             accountList  = adminLogic.getUserAccounts(userId);
         } catch (Exception e) {
-            setMessage(MESSAGE_WRONG_INPUT);
+            setMessage(MESSAGE_NO_ACCOUNT);
             return;
         }
         for (int i = 0; i < accountList.size(); i++) {
