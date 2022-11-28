@@ -3,9 +3,9 @@ package data;
 import entity.User;
 
 import java.util.ArrayList;
-
-import static printer.Printer.EXCEPTION_NO_ID;
-
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class UserDB {
     private static final UserDB userDB = new UserDB();
@@ -20,19 +20,19 @@ public class UserDB {
         userList.add(user);
     }
 
-    public User getUserByUserId(String userId){
-        User findUser = new User();
+    public Optional<User> getUserByUserId(String userId) {
+        User findUser = null;
         for (User user : userList) {
             if (user.getUserID().equals(userId)) {
                 findUser = user;
                 break;
             }
         }
-        return findUser;
+        return Optional.ofNullable(findUser);
     }
 
-    public ArrayList<User> getAllUsers() {
-        return userList;
+    public List<User> getAllUsers() {
+        return userList.stream().filter(x -> !x.isAdmin()).collect(Collectors.toList());
     }
 }
 

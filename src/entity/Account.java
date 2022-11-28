@@ -6,12 +6,6 @@ public class Account {
     private String accountNum;
     private String userName;
 
-    public Account(){
-        userID = "";
-        accountNum = "";
-        userName ="";
-
-    }
     public Account(String userID, String userName, int countAc) {
         this.accountNum = makeAccountNum(userID, countAc);
         this.accountBalance = 0;

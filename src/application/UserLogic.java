@@ -11,9 +11,6 @@ import entity.User;
 import java.util.List;
 import java.util.Optional;
 
-import static printer.Printer.EXCEPTION_NO_ID;
-import static printer.Printer.EXCEPTION_WRONG_PW;
-
 
 public class UserLogic {
 
@@ -23,32 +20,29 @@ public class UserLogic {
 
     private static UserLogic userLogic = new UserLogic();
 
-    public static UserLogic getInstance () {
+    public static UserLogic getInstance() {
         return userLogic;
     }
 
-    public String signUp (String name, String id, String pw) {
-            User opUser = userDB.getUserByUserId(id);
-            if (opUser.getUserID().equals(id)) {
-                throw new IllegalArgumentException("아이디 중복");
-            }
-            User user = new User(id, pw, name, false);
-            Account account = new Account(user.getUserID(), user.getUserName(), 0);
-            History history = new History(account.getAccountNum(), account.getAccountBalance(), TradeType.생성, 0, "조미김");
-            userDB.insertUser(user);
-            accountDB.insertAccount(account);
-            historyDB.insertHistory(history);
-
+    public String signUp(String name, String id, String pw) {
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        if (opUser.isPresent()) {
+            throw new IllegalArgumentException("아이디 중복");
+        }
+        User user = new User(id, pw, name, false);
+        Account account = new Account(user.getUserID(), user.getUserName(), 0);
+        History history = new History(account.getAccountNum(),account.getAccountBalance(), TradeType.생성, 0, "조미김");
+        userDB.insertUser(user);
+        accountDB.insertAccount(account);
+        historyDB.insertHistory(history);
         return "정상적으로 회원가입 되었습니다!";
     }
 
-
-    public User login(String id, String pw){
-        User user = userDB.getUserByUserId(id);
-        if(user.getUserID().equals("")){
-            throw new IllegalArgumentException(EXCEPTION_NO_ID);
-        }else if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
+    public User login(String id, String pw) {
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        if (!user.getPassWord().equals(pw)) {
+            throw new IllegalArgumentException("비밀번호 불일치");
         }
         return user;
     }
@@ -63,7 +57,8 @@ public class UserLogic {
     }
 
     public List<Account> getMyAccounts(User user) {
-        return accountDB.getAllAccountByUserID(user.getUserID());
+        List<Account> accounts = accountDB.getAllAccountByUserID(user.getUserID());
+        return accounts;
     }
 
     public void depositMoney(int money, Account account) {

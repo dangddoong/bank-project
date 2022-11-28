@@ -27,12 +27,6 @@ public class History {
         this.bankName = bankName;
         this.accountBalance = accountBalance;
     }
-    public History(){
-        accountNum = "";
-        TradeType.valueOf("");
-        bankName = "";
-        tradeDate = "";
-    }
 
     public String getTradeDate() {
         return tradeDate;
@@ -56,10 +50,5 @@ public class History {
 
     public String getBankName() {
         return bankName;
-    }
-
-    public String toString() {
-        return "거래날짜 : " +tradeDate.split("T")[0] + " 거래시간 : "+ tradeDate.split("T")[1] + " 계좌번호 : " + accountNum +
-                " 금액 : " + money +" 잔액 : "+ accountBalance;
     }
 }

@@ -12,8 +12,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static printer.Printer.*;
-
 
 public class AdminLogic {
     UserDB userDB = UserDB.getInstance();
@@ -27,37 +25,55 @@ public class AdminLogic {
     }
 
     public void signUp(String name, String id, String pw) {
-        User user = userDB.getUserByUserId(id);
-        if (user.getUserID().equals(id)) {
-            throw new IllegalArgumentException(EXCEPTION_DOUBLE_ID);
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        if (opUser.isPresent()) {
+            throw new IllegalArgumentException("아이디 중복");
         }
-        User signUser = new User(id, pw, name, true);
-        userDB.insertUser(signUser);
+        User user = new User(id, pw, name, true);
+        userDB.insertUser(user);
     }
 
     public User login(String id, String pw) {
-        User user = userDB.getUserByUserId(id);
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
         if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
+            throw new IllegalArgumentException("비밀번호 불일치");
         }
         return user;
     }
 
-    public User confirmId(String id) {
-        if(userDB.getUserByUserId(id).getUserID().equals("")){
-            throw new IllegalArgumentException(EXCEPTION_NO_ID);
+    public Optional<User> confirmId(String id) {
+        Optional<User> opUser = userDB.getUserByUserId(id);
+        if (opUser.isEmpty()) {
+            throw new IllegalArgumentException("아이디 없음");
         }
-        return userDB.getUserByUserId(id);
+        return opUser;
     }
 
     public void changeUserPw(String id, String pw) {
-        User user = confirmId(id);
-        user.changeUserPassword(pw);
+        Optional<User> user = confirmId(id);
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("아이디 없음");
+        }
+        User foundUser = user.get();
+        foundUser.changeUserPassword(pw);
     }
 
     public List<Account> getUserAccounts(String id) {
-        confirmId(id);
-        return accountDB.getAllAccountByUserID(id);
+        Optional<User> user = confirmId(id);
+        List<Account> accounts = accountDB.getAllAccount().stream().filter(i -> i.getUserID().equals(id)).collect(Collectors.toList());
+        if (accounts.isEmpty()) {
+            throw new IllegalArgumentException("계좌가 없습니다");
+        }
+        return accounts;
+    }
+
+    public List<Account> getUserAccountsByID(String userID) {
+        List<Account> accounts = accountDB.getAllAccountByUserID(userID);
+        if (accounts.isEmpty()) {
+            throw new IllegalArgumentException("해당 유저의 계좌가 없습니다");
+        }
+        return accounts;
     }
 
     public void deleteAccount(Account account) {
@@ -66,8 +82,11 @@ public class AdminLogic {
     }
 
     public User findUserByAccount(String userAccount) {
-        Account OpAccount = accountDB.getAccountByAccountNumber(userAccount);
-        return userDB.getUserByUserId(OpAccount.getUserID());
+        Optional<Account> OpAccount = accountDB.getAccountByAccountNumber(userAccount);
+        if (OpAccount.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 계좌");
+        }
+        return userDB.getUserByUserId(OpAccount.get().getUserID()).get();
     }
 
     public ArrayList<Account> getAllAccounts() {
@@ -78,8 +97,9 @@ public class AdminLogic {
         return historyDB.getAllHistory();
     }
 
-    public ArrayList<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userDB.getAllUsers();
+
     }
 }
 /*

@@ -13,12 +13,6 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User() {
-        userID = "";
-        passWord = "";
-        userName = "";
-    }
-
     public String getUserID() {
         return userID;
     }
@@ -37,10 +31,6 @@ public class User {
 
     public void changeUserPassword(String pw) {
         this.passWord = pw;
-    }
-
-    public String toString(){
-        return "계좌의 소유자명 : "+ userID +" 소유자의 아이디 : "+ userName;
     }
 }
 
