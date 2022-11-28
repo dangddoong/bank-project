@@ -11,6 +11,8 @@ import entity.User;
 import java.util.List;
 import java.util.Optional;
 
+import static printer.Printer.*;
+
 
 public class UserLogic {
 
@@ -27,7 +29,7 @@ public class UserLogic {
     public String signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isPresent()) {
-            throw new IllegalArgumentException("아이디 중복");
+            throw new IllegalArgumentException(EXCEPTION_DOUBLE_ID);
         }
         User user = new User(id, pw, name, false);
         Account account = new Account(user.getUserID(), user.getUserName(), 0);
@@ -35,14 +37,14 @@ public class UserLogic {
         userDB.insertUser(user);
         accountDB.insertAccount(account);
         historyDB.insertHistory(history);
-        return "정상적으로 회원가입 되었습니다!";
+        return MESSAGE_SUCCESS_SIGNUP;
     }
 
     public User login(String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
-        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException(EXCEPTION_NO_ID));
         if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException("비밀번호 불일치");
+            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
         }
         return user;
     }

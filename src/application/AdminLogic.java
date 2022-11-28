@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static printer.Printer.*;
+
 
 public class AdminLogic {
     UserDB userDB = UserDB.getInstance();
@@ -27,7 +29,7 @@ public class AdminLogic {
     public void signUp(String name, String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isPresent()) {
-            throw new IllegalArgumentException("아이디 중복");
+            throw new IllegalArgumentException(EXCEPTION_DOUBLE_ID);
         }
         User user = new User(id, pw, name, true);
         userDB.insertUser(user);
@@ -35,9 +37,9 @@ public class AdminLogic {
 
     public User login(String id, String pw) {
         Optional<User> opUser = userDB.getUserByUserId(id);
-        User user = opUser.orElseThrow(() -> new IllegalArgumentException("아이디 없음"));
+        User user = opUser.orElseThrow(() -> new IllegalArgumentException(EXCEPTION_NO_ID));
         if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException("비밀번호 불일치");
+            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
         }
         return user;
     }
@@ -45,7 +47,7 @@ public class AdminLogic {
     public Optional<User> confirmId(String id) {
         Optional<User> opUser = userDB.getUserByUserId(id);
         if (opUser.isEmpty()) {
-            throw new IllegalArgumentException("아이디 없음");
+            throw new IllegalArgumentException(EXCEPTION_NO_ID);
         }
         return opUser;
     }
@@ -53,7 +55,7 @@ public class AdminLogic {
     public void changeUserPw(String id, String pw) {
         Optional<User> user = confirmId(id);
         if (user.isEmpty()) {
-            throw new IllegalArgumentException("아이디 없음");
+            throw new IllegalArgumentException(EXCEPTION_NO_ID);
         }
         User foundUser = user.get();
         foundUser.changeUserPassword(pw);
