@@ -1,7 +1,7 @@
 package printer;
 
 public class Printer {
-    public static final String BLANK_HALF = "                        ";
+    public static final String BLANK_HALF = "                          ";
     public static final String BLANK = "                                                    ";
     public static final String CLEAR = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
     public static final String ADMIN_PREFIX = "admin_";
@@ -30,35 +30,35 @@ public class Printer {
     public static final String EXCEPTION_NO_ID = "아이디 없음";
     public static final String EXCEPTION_WRONG_PW = "비밀번호 불일치";
 
-    public static final String HEADER_HOME =                     "                 \uD83D\uDCB0 조미김 은행에 오신걸 환영합니다 \uD83D\uDCB0";
-    public static final String HEADER_LOGIN =                    "                         \uD83D\uDCB0 로그인 페이지 \uD83D\uDCB0";
-    public static final String HEADER_SIGN_UP =                  "                        \uD83D\uDCB0 회원가입 페이지 \uD83D\uDCB0";
+    public static final String HEADER_HOME =                     "                    \uD83D\uDCB0 조미김 은행에 오신걸 환영합니다 \uD83D\uDCB0";
+    public static final String HEADER_LOGIN =                    "                            \uD83D\uDCB0 로그인 페이지 \uD83D\uDCB0";
+    public static final String HEADER_SIGN_UP =                  "                           \uD83D\uDCB0 회원가입 페이지 \uD83D\uDCB0";
 
-    public static final String MESSAGE_WRONG_INPUT =             "                       \uD83D\uDD34 잘못된 입력입니다 \uD83D\uDD34";
-    public static final String MESSAGE_DOUBLE_ID =               "                    \uD83D\uDD34 이미 가입된 아이디입니다 \uD83D\uDD34";
-    public static final String MESSAGE_NO_ID =                   "                   \uD83D\uDD34 존재하지 않는 아이디입니다 \uD83D\uDD34";
-    public static final String MESSAGE_WRONG_PW =                "                  \uD83D\uDD34 비밀번호가 일치하지 않습니다 \uD83D\uDD34";
-    public static final String MESSAGE_SUCCESS_SIGNUP =          "                 \uD83D\uDFE2 정상적으로 회원가입 되었습니다 \uD83D\uDFE2";
-    public static final String MESSAGE_SUCCESS_LOGOUT =          "                 \uD83D\uDFE2 정상적으로 로그아웃 되었습니다 \uD83D\uDFE2";
+    public static final String MESSAGE_WRONG_INPUT =             "                           \uD83D\uDD34 잘못된 입력입니다 \uD83D\uDD34";
+    public static final String MESSAGE_DOUBLE_ID =               "                        \uD83D\uDD34 이미 가입된 아이디입니다 \uD83D\uDD34";
+    public static final String MESSAGE_NO_ID =                   "                        \uD83D\uDD34 존재하지 않는 아이디입니다 \uD83D\uDD34";
+    public static final String MESSAGE_WRONG_PW =                "                       \uD83D\uDD34 비밀번호가 일치하지 않습니다 \uD83D\uDD34";
+    public static final String MESSAGE_SUCCESS_SIGNUP =          "                      \uD83D\uDFE2 정상적으로 회원가입 되었습니다 \uD83D\uDFE2";
+    public static final String MESSAGE_SUCCESS_LOGOUT =          "                      \uD83D\uDFE2 정상적으로 로그아웃 되었습니다 \uD83D\uDFE2";
 
-    public static final String HEADER_USER =                     "                    \uD83D\uDCB0 조미김 은행 회원 페이지 \uD83D\uDCB0";
-    public static final String HEADER_DEPOSIT =                  "                        \uD83D\uDCB0 입금 페이지 \uD83D\uDCB0";
-    public static final String HEADER_WITHDRAW =                 "                        \uD83D\uDCB0 출금 페이지 \uD83D\uDCB0";
-    public static final String HEADER_SHOW_ACCOUNT_INFO =        "                     \uD83D\uDCB0 사용자 정보 페이지 \uD83D\uDCB0";
-    public static final String HEADER_MAKE_ACCOUNT =             "                    \uD83D\uDCB0 계좌 추가 생성 페이지 \uD83D\uDCB0";
+    public static final String HEADER_USER =                     "                         \uD83D\uDCB0 조미김 은행 회원 페이지 \uD83D\uDCB0";
+    public static final String HEADER_DEPOSIT =                  "                             \uD83D\uDCB0 입금 페이지 \uD83D\uDCB0";
+    public static final String HEADER_WITHDRAW =                 "                             \uD83D\uDCB0 출금 페이지 \uD83D\uDCB0";
+    public static final String HEADER_SHOW_ACCOUNT_INFO =        "                          \uD83D\uDCB0 사용자 정보 페이지 \uD83D\uDCB0";
+    public static final String HEADER_MAKE_ACCOUNT =             "                         \uD83D\uDCB0 계좌 추가 생성 페이지 \uD83D\uDCB0";
 
-    public static final String MESSAGE_SUCCESS_LOGIC =           "                \uD83D\uDFE2 요청이 정상적으로 처리되었습니다 \uD83D\uDFE2";
-    public static final String MESSAGE_STOP_LOGIC =              "                     \uD83D\uDD34 요청이 중단 되었습니다 \uD83D\uDD34";
-    public static final String MESSAGE_NO_MORE_ACCOUNT =         "                \uD83D\uDD34 계좌는 5개 이상 만드실 수 없습니다 \uD83D\uDD34";
-    public static final String MESSAGE_NO_ACCOUNT =              "        \uD83D\uDD34 잘못 입력하셨거나, 해당 유저의 계좌가 존재하지 않습니다 \uD83D\uDD34";
+    public static final String MESSAGE_SUCCESS_LOGIC =           "                     \uD83D\uDFE2 요청이 정상적으로 처리되었습니다 \uD83D\uDFE2";
+    public static final String MESSAGE_STOP_LOGIC =              "                          \uD83D\uDD34 요청이 중단 되었습니다 \uD83D\uDD34";
+    public static final String MESSAGE_NO_MORE_ACCOUNT =         "                     \uD83D\uDD34 계좌는 5개 이상 만드실 수 없습니다 \uD83D\uDD34";
+    public static final String MESSAGE_NO_ACCOUNT =              "             \uD83D\uDD34 잘못 입력하셨거나, 해당 유저의 계좌가 존재하지 않습니다 \uD83D\uDD34";
 
-    public static final String HEADER_ADMIN =                    "                     \uD83D\uDCB0 조미김 은행 관리자 페이지 \uD83D\uDCB0";
-    public static final String HEADER_CHANGE_PASSWORD =          "                    \uD83D\uDCB0 사용자 비밀번호 변경 페이지 \uD83D\uDCB0";
-    public static final String HEADER_DELETE_ACCOUNT =           "                      \uD83D\uDCB0 사용자 계좌 삭제 페이지 \uD83D\uDCB0";
-    public static final String HEADER_FIND_USER =                "                    \uD83D\uDCB0 계좌번호로 계좌 찾기 페이지 \uD83D\uDCB0";
-    public static final String HEADER_FIND_ACCOUNT =             "                   \uD83D\uDCB0 사용자 ID로 계좌 찾기 페이지 \uD83D\uDCB0";
-    public static final String HEADER_ALL_ACCOUNT =              "                      \uD83D\uDCB0 모든 계좌 조회 페이지 \uD83D\uDCB0";
-    public static final String HEADER_ALL_HISTORY =              "                    \uD83D\uDCB0 모든 거래 내역 조회 페이지 \uD83D\uDCB0";
+    public static final String HEADER_ADMIN =                    "                        \uD83D\uDCB0 조미김 은행 관리자 페이지 \uD83D\uDCB0";
+    public static final String HEADER_CHANGE_PASSWORD =          "                       \uD83D\uDCB0 사용자 비밀번호 변경 페이지 \uD83D\uDCB0";
+    public static final String HEADER_DELETE_ACCOUNT =           "                         \uD83D\uDCB0 사용자 계좌 삭제 페이지 \uD83D\uDCB0";
+    public static final String HEADER_FIND_USER =                "                     \uD83D\uDCB0 계좌번호로 사용자 찾기 페이지 \uD83D\uDCB0";
+    public static final String HEADER_FIND_ACCOUNT =             "                      \uD83D\uDCB0 사용자 ID로 계좌 찾기 페이지 \uD83D\uDCB0";
+    public static final String HEADER_ALL_ACCOUNT =              "                         \uD83D\uDCB0 모든 계좌 조회 페이지 \uD83D\uDCB0";
+    public static final String HEADER_ALL_HISTORY =              "                       \uD83D\uDCB0 모든 거래 내역 조회 페이지 \uD83D\uDCB0";
     public static final String FOOTER =                          "==============================================================================";
 
     public static final String HEADER_USER_WELCOME =             " 님 환영합니다!";
@@ -96,7 +96,6 @@ public class Printer {
     public static final String ADMIN_WELCOME_SUFFIX = " 관리자님 환영합니다";
     public static final String USER_ACCOUNT =  "사용자 계좌 번호:";
     public static final String IS_ACCOUNT_LIST =  " 님의 계좌 목록입니다";
-
 
     public static void clearCmd() {
         System.out.println(CLEAR);

@@ -100,6 +100,7 @@ public class UserUI {
         println(BLANK + FOOTER);
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
+        setMessage(MESSAGE_SUCCESS_LOGIC);
     }
 
     private void showHistories() {
@@ -136,7 +137,7 @@ public class UserUI {
         }
         println(BLANK + FOOTER);
         if(userLogic.getMyAccounts(loginUser).size() == 5){
-          setMessage(MESSAGE_NO_MORE_ACCOUNT);
+            setMessage(MESSAGE_NO_MORE_ACCOUNT);
             return;
         }
         print(BLANK + ENTER_Y_TO_MAKE_ACCOUNT);

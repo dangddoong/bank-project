@@ -207,11 +207,3 @@ public class AdminUI {
         return scanner.nextLine();
     }
 }
-
-
-//사용자 id와 변경할 비밀번호 필요
-
-
-// 2
-//id가 없으면 null 반환, 있으면 List<Acount> 반환, 이후 인덱스와 계좌번호리스트를 띄우는 UI 필요
-//UI에서 번호 입력시 List<Account>와 함께 번호를 반환 <= 리스트로 변경 가능하기 때문에 선택번호와 인덱스 맞춰줄 것

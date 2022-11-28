@@ -81,19 +81,3 @@ public class UserLogic {
         return true;
     }
 }
-
-/*
-    public List<Account> findAccountInfo(User user) {
-        List<Account> accounts = accountDB.getAllAccount().stream().
-                filter(id -> id.getUserID()
-                        .equals(user.getUserID()))
-                .collect(Collectors.toList());
-        return accounts;
-    }
-
-    public History createWithdrawHistory(Account accounts, String money) {
-        History history = new History(accounts.getAccountNum(), TradeType.출금, money, "조미김 은행");
-        historyDB.insertHistory(history);
-        return history;
-    }
- */

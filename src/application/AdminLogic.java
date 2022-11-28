@@ -99,25 +99,5 @@ public class AdminLogic {
 
     public List<User> getAllUsers() {
         return userDB.getAllUsers();
-
     }
 }
-/*
-    Optional<Account> first = accountDB.getAllAccount().stream().filter(account -> account.getAccountNum().equals(userAccount)).findFirst();
-    Account account = first.get();
-    String userId = account.getUserID();
-    Optional<User> opUser = userDB.getUserByUserId(userId);
-    User user = opUser.get();
-        return user;
-*/
-   /* public Optional<Account> confirmAccount(String userAccount){
-        AccountDB accountDB = new AccountDB();
-        for (Account account : accountDB) {
-            if (account.getAccountNum().equals(userAccount)) {
-                return account;
-            }
-        }
-        return Optional.empty();
-    }
-    필요없어서 뺌 원래는 계좌번호 받아서 Account 출력하던 로직
-    */

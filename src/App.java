@@ -37,7 +37,7 @@ public class App {
     }
 
     static void initData() {
-        userLogic.signUp("김철수", "cheols", "cheolsoo");
+        userLogic.signUp("김철수", "cheolsoo", "cheolsoo");
         userLogic.signUp("강민희", "minhee", "cheolsoo");
         userLogic.signUp("이민수", "minsoo", "minsoo");
         userLogic.signUp("르탄이", "sparta", "sparta");
