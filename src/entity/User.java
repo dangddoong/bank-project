@@ -13,7 +13,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User() {  }
+    public User() {
+        userID = "";
+        passWord = "";
+        userName = "";
+    }
 
     public String getUserID() {
         return userID;

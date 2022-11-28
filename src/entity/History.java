@@ -27,6 +27,12 @@ public class History {
         this.bankName = bankName;
         this.accountBalance = accountBalance;
     }
+    public History(){
+        accountNum = "";
+        TradeType.valueOf("");
+        bankName = "";
+        tradeDate = "";
+    }
 
     public String getTradeDate() {
         return tradeDate;

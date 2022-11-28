@@ -20,16 +20,13 @@ public class UserDB {
         userList.add(user);
     }
 
-    public User getUserByUserId(String userId) throws IllegalArgumentException {
-        User findUser = null;
+    public User getUserByUserId(String userId){
+        User findUser = new User();
         for (User user : userList) {
             if (user.getUserID().equals(userId)) {
                 findUser = user;
                 break;
             }
-        }
-        if (findUser == null){
-            throw new IllegalArgumentException("아이디 없음");
         }
         return findUser;
     }

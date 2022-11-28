@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static printer.Printer.*;
+
 
 public class AdminLogic {
     UserDB userDB = UserDB.getInstance();
@@ -27,7 +29,7 @@ public class AdminLogic {
     public void signUp(String name, String id, String pw) {
         User user = userDB.getUserByUserId(id);
         if (user.getUserID().equals(id)) {
-            throw new IllegalArgumentException("아이디 중복");
+            throw new IllegalArgumentException(EXCEPTION_DOUBLE_ID);
         }
         User signUser = new User(id, pw, name, true);
         userDB.insertUser(signUser);
@@ -36,12 +38,15 @@ public class AdminLogic {
     public User login(String id, String pw) {
         User user = userDB.getUserByUserId(id);
         if (!user.getPassWord().equals(pw)) {
-            throw new IllegalArgumentException("비밀번호 불일치");
+            throw new IllegalArgumentException(EXCEPTION_WRONG_PW);
         }
         return user;
     }
 
     public User confirmId(String id) {
+        if(userDB.getUserByUserId(id).getUserID().equals("")){
+            throw new IllegalArgumentException(EXCEPTION_NO_ID);
+        }
         return userDB.getUserByUserId(id);
     }
 
