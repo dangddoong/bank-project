@@ -72,17 +72,13 @@ public class AdminUI {
         findAllUserID();
         print(BLANK + ENTER_USER_ID_ACCOUNT);
         String userId = scanAndGetString();
-        List<Account> userAccounts;
-        try {
-            userAccounts = adminLogic.getUserAccountsByID(userId);
-        } catch (Exception e) {
-            setMessage(MESSAGE_NO_ACCOUNT);
-            return;
-        }
+        List<Account> userAccounts = adminLogic.getUserAccounts(userId);
         println(BLANK + userId + IS_ACCOUNT_LIST);
+
         for (int i = 0; i < userAccounts.size(); i++) {
             println(BLANK + (i + 1) + ". " + userAccounts.get(i).getAccountNum());
         }
+
         print(BLANK + ENTER_ACCOUNT);
         int idx = scanAndGetParsedInt();
         Account account;
@@ -96,6 +92,7 @@ public class AdminUI {
             setMessage(MESSAGE_WRONG_INPUT);
             return;
         }
+
         print(BLANK + ENTER_Y_TO_DELETE);
         if (scanner.nextLine().equals("y")) {
             adminLogic.deleteAccount(account);
@@ -116,14 +113,9 @@ public class AdminUI {
         print(BLANK + ENTER_ACCOUNT_USER_ID);
         String accountNumber = scanAndGetString();
 
-        User user;
-        try {
-            user = adminLogic.findUserByAccount(accountNumber);
-        } catch (Exception e) {
-            setMessage(MESSAGE_WRONG_INPUT);
-            return;
-        }
-        println(BLANK + "계좌번호의 소유자:" + user.getUserName() + ", ID:" + user.getUserID());
+        User user = adminLogic.findUserByAccount(accountNumber);
+
+        println(BLANK + user.toString());
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
         setMessage(MESSAGE_SUCCESS_LOGIC);
@@ -132,18 +124,10 @@ public class AdminUI {
     private void findAccountsByUserId() {
         clearCmd();
         println(BLANK + HEADER_FIND_ACCOUNT);
-        findAllUserID();
         print(BLANK + ENTER_USER_ID_ACCOUNT);
         String userId = scanAndGetString();
-
         println(BLANK + userId + IS_ACCOUNT_LIST);
-        List<Account> accountList;
-        try {
-            accountList  = adminLogic.getUserAccounts(userId);
-        } catch (Exception e) {
-            setMessage(MESSAGE_WRONG_INPUT);
-            return;
-        }
+        List<Account> accountList  = adminLogic.getUserAccounts(userId);
         for (int i = 0; i < accountList.size(); i++) {
             println(BLANK +(i+1) + ". " + accountList.get(i).getAccountNum());
         }
@@ -156,9 +140,9 @@ public class AdminUI {
         clearCmd();
         println(BLANK + HEADER_ALL_ACCOUNT);
         println(BLANK + ALL_ACCOUNT);
-        ArrayList<Account> accounts = adminLogic.getAllAccounts();
+        List<Account> accounts = adminLogic.getAllAccounts();
         for (Account account : accounts) {
-            println(BLANK +"사용자명: "+ account.getUserName()+ ", 사용자ID: " + account.getUserID()+ ", 계좌번호: " + account.getAccountNum()+", 계좌 잔고: "+ account.getAccountBalance());
+            println(BLANK + account.toString());
         }
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
@@ -171,7 +155,7 @@ public class AdminUI {
         println(BLANK + ALL_HISTORY);
         ArrayList<History> histories = adminLogic.getAllHistories();
         for (History history : histories) {
-            println(BLANK + "거래 타입: " + history.getTradeType() + ", 거래시간: " + history.getTradeDate() + ", 거래 금액: " + history.getMoney()+ ", 계좌 잔고: "+history.getAccountBalance()+", 계좌번호: "+history.getAccountNum());
+            println(BLANK + history.toString());
         }
         print(BLANK + ENTER_ANYKEY_TO_BACK);
         scanAndGetString();
