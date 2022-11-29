@@ -74,7 +74,7 @@ TradeType(Enum) | 프로젝트 내에서 사용할 객체 정의
 TradeType(Enum 자료형)을 통한 거래 유형 정의 |
 | Printer | Printer | 코드 단순화 + 사용자에게 보여질 print 값 관리(리팩터링 용이성) |
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2da37b58-92e0-4054-889c-5cbfa7b08736/Untitled.png)
+<img src= "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2da37b58-92e0-4054-889c-5cbfa7b08736/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221129T002232Z&X-Amz-Expires=86400&X-Amz-Signature=c15ce185f28a222c01f34f002fb53bd05017bf6855870598e0326d7da9013f32&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject">
 
 ## 좌측[프로젝트 구조]  / 우측 [Git branch - master, develop, feat]
 --- 
