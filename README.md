@@ -1,34 +1,44 @@
 # 내일배움캠프 4기 - B반 8조
 
-### 01. 프로젝트 명
+### 0. 팀 소개 [ 조미김 조!]
 
-- 조미김은행
+**B반 8조**
+
+**조**성현, **이**혜민, **김**관호, **김**동균, **김**학윤
+
+<img src = "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/66560826-6047-403a-967e-1fc8e931018e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221129T000910Z&X-Amz-Expires=86400&X-Amz-Signature=f740b9f4789b964e00f1bdd817f895246da03727e40fc6aed0c5156de1387111&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject">
+
+
+### 1. 프로젝트 주제 - **은행 관리 시스템**
+
+- 제안해주신 명세를 바탕으로 **‘조미김 조’**만의 특색있는 은행 관리 시스템을 제작하고자 함
+- 일반 사용자 / 어드민을 나누어 유저가 관리될 수 있는 은행 시스템 구축 목표
 
 ---
 
-### 02. 프로젝트 설명
+### 2. 프로젝트 개요
 
-- 이 프로젝트는 은행 내에서 이루어지는 간단한 입출금과 거래 내역 조회를 위해 만들어졌다.
-- 관리자 로그인 기능으로 회원/계좌 관리가 가능하다.
-- 은행 관리 시스템을 최대한 Layered Architecture 이용하여 구현
-- Java의 scanner 기능 사용해서 구현.
+- 은행 내에서 이루어지는 간단한 입출금, 거래 내역 조회, 계좌 관리 등 구현
+- 일반 사용자 / 어드민의 분리
+    - 일반 사용자 - 자신 소유의 계좌 입출금, 관리 및 거래내역 열람가능
+    - 어드민 - 회원 계좌와 계정 관리 및 은행 전체 기록 확인 가능
+- Layered Architecture 를 적용해 프로젝트 제작 구조화    (아래에서 자세히 설명)
+    - Presentation ↔ Application ↔ Data
+    - entity 패키지를 통한 객체 구현
+- Java의 Scanner 기능과 Print를 사용해 입출력 구현
 
 ---
 
 ### 03. 팀원 소개 및 역할
 
-조씨, 이씨, 김씨가 모여서 '조이김'
-
-시적 허용을 활용해 '조미김'으로 정했습니다. 
-<img src = "https://m.convenii.com/web/upload/NNEditor/20210303/CON09361_shop1_135945.jpg">
 
 | 이름   | 역할            | 
 |------|---------------|
-| 조성현  | 팀장 - 발표       | 
-| 김관호  | 팀원 - 기술 총책임   |
-| 김동균  | 팀원 - 구현과 오류수정 |
-| 김학윤  | 팀원 - 구현과 오류수정 |
-| 이혜민  | 팀원 - 구현과 오류수정 |
+| 조성현  | 팀장 - 레포지토리, 유저 로직 구현       | 
+| 김관호  | 팀원 - 프린터, 유저 로직 구현   |
+| 김동균  | 팀원 - 레포지토리, 유저 로직 구현 |
+| 김학윤  | 팀원 - 프레젠테이션, 어드민 로직 구현 |
+| 이혜민  | 팀원 - 프레젠테이션, 어드민 로직 구현 |
 
 
 
@@ -45,26 +55,28 @@
 
 ---
 
-### 05. 구현사항
+### 5. 프로젝트 계층 소개 [Presentation ↔ Application ↔ Data]
 
-| Package      | Function                       | Request                | Response               |
-|--------------|--------------------------------|------------------------|------------------------|
-| Application  | Logic 구현                       | Data Package으로 data 요청 | Presentation에 기능 제공    |
-| Data         | Data의 리스트화와 데이터 제공             | -                      | Application에 Data 제공   |
-| Entity       | Object화                        | -                      | 전체 패키지에 Object 제공      |
-| Presentation | UI 기능 구현                       | Application으로 로직 요청    | User에게 시각화 제공          |
-| Printer      | Abstraction, 추후에 발생할 변경 비용 최소화 | -                      | 전체 프로젝트에서 추상화/변경 비용 감소 |
+| 패키지 명 | 클래스 명 | 설명 |
+| --- | --- | --- |
+| Presentation | UserUI
+AdminUI | 사용자에게 입력을 받고, 결과값을 보여주는 입출력 기능 구현부 |
+| Application | AdminLogic
+UserLogic | Presentation 계층에서 입력받은 값을 바탕으로, Data 계층과 상호작용하며 값들을 처리하는 로직 구현부 |
+| Data | AccountDB
+HistoryDB
+UserDB | Application에서 요청한 데이터의 삽입
+Application에서 요청한 데이터의 전체 조회, 부분 조회 값을 전달 |
+| Entity | User
+Account
+History
+TradeType(Enum) | 프로젝트 내에서 사용할 객체 정의
+TradeType(Enum 자료형)을 통한 거래 유형 정의 |
+| Printer | Printer | 코드 단순화 + 사용자에게 보여질 print 값 관리(리팩터링 용이성) |
 
-![img.png](img.png)
-![img_2.png](img_2.png)
+![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2da37b58-92e0-4054-889c-5cbfa7b08736/Untitled.png)
 
-- Class, Method는 각자의 책임과 기능을 다하는 것으로 구현
-- Layered Architecture 의 구현
-- Data는 Application을 바라보고(데이터를 제공하고)
-- Application은 Presentation을 바라본다(로직을 제공한다)
-- Layered Architecture의 구현으로 비용 최소화, 분업의 원할함을 도모했다.
-- 위 사진은 각자의 Branch로 분할 작업하는 이미지.
-
+## 좌측[프로젝트 구조]  / 우측 [Git branch - master, develop, feat]
 --- 
 
 ### 06. 관련 링크
