@@ -59,10 +59,10 @@
 
 | 패키지 명 | 클래스 명 | 설명 |
 | --- | --- | --- |
-| Presentation | UserUI \n AdminUI | 사용자에게 입력을 받고 \n 결과값을 보여주는 입출력 기능 구현부 |
-| Application | AdminLogic \n UserLogic | Presentation 계층에서 입력받은 값을 바탕으로 \n Data 계층과 상호작용하며 값들을 처리하는 로직 구현부 |
-| Data | AccountDB \n HistoryDB, \n UserDB | Application에서 요청한 데이터의 삽입 \n Application에서 요청한 데이터의 전체 조회, 부분 조회 값을 전달 |
-| Entity | User \n Account \n History \n TradeType(Enum) | 프로젝트 내에서 사용할 객체 정의 \n TradeType(Enum 자료형)을 통한 거래 유형 정의 |
+| Presentation | UserUI, AdminUI | 사용자에게 입력을 받고, 결과값을 보여주는 입출력 기능 구현부 |
+| Application | AdminLogic, UserLogic | Presentation 계층에서 입력받은 값을 바탕으로, Data 계층과 상호작용하며 값들을 처리하는 로직 구현부 |
+| Data | AccountDB, HistoryDB, UserDB | Application에서 요청한 데이터의 삽입, Application에서 요청한 데이터의 전체 조회, 부분 조회 값을 전달 |
+| Entity | User, Account, History, TradeType(Enum) | 프로젝트 내에서 사용할 객체 정의, TradeType(Enum 자료형)을 통한 거래 유형 정의 |
 | Printer | Printer | 코드 단순화 + 사용자에게 보여질 print 값 관리(리팩터링 용이성) |
 
 <img src= "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/2da37b58-92e0-4054-889c-5cbfa7b08736/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221129%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221129T002232Z&X-Amz-Expires=86400&X-Amz-Signature=c15ce185f28a222c01f34f002fb53bd05017bf6855870598e0326d7da9013f32&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject">
